@@ -16,7 +16,7 @@
         <?php include '../includes/header-admin.php'; ?>
         <div class="page-divider">
             <div class="admin-sidebar">
-                
+
             </div>
             <div class="segment-margined">
                 <div>
@@ -42,6 +42,7 @@
                         <label class="element">to:</label>
                         <input id="invoiceDateTo" type="date" class="element ui" name="invoice-date-filter-to"
                             min="2024-01-01" max="1951-01-01"></input>
+                        <button class="element ui">Apply</button>
                 </div>
                 <div id="invoice-table-container">
                     <table id="invoice-table">
