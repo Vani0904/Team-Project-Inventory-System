@@ -5,50 +5,98 @@
     margin: auto;
 }
 
+.segment-margined
+{
+    width: 100%;
+    padding: 25px;
+    margin-left: 1vw;
+    margin-right: 1vw;
+}
+
 /*#region Invoice Page*/
 
 #invoice-table-filters
 {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.invoice-table-filter
+#invoice-table-filters .filter
 {
     display: flex;
     flex-direction: row;
     padding: 1vh 0px;
+    align-items: center;
 }
 
-.invoice-table-filter-element
+.element
 {
-    padding: 0px 1vw;
+    padding: 1vh 1vw;
     border-radius: 5px;
+}
+
+.element.ui
+{
+    color: white;
+    background-color: purple;
+    color-scheme: dark;
 }
 
 #invoice-table-container
-{
-    border: 1.5px  solid black;
-    border-radius: 5px;
+{   
+
 }
 
 #invoice-table
 {
-    background-color: purple;
-    color: white;
-    width: 100%;
+    border-spacing: 0px;
+    border-collapse: collapse;
+    min-width: 100%;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+    margin: 2vh 0;
+    font-size: 1.5vh;
 }
 
-.invoice-tr
+#invoice-table thead tr
 {
-    grid-template-columns: repeat(5, auto);
-    background-color: violet;
+    text-align: left;
+    background: purple;
+    color: white;
+}
+
+#invoice-table th, td
+{
+    padding: 2vh 1vw;
+}
+
+#invoice-table tbody tr
+{
+    border-bottom: 1px solid purple;
+}
+
+#invoice-table tbody tr:nth-of-type(even)
+{
+    background:lightgray;
+}
+
+#invoice-table tbody tr:last-of-type
+{
+    border-bottom: 2px solid black;
+}
+
+#invoice-table tbody tr.active
+{
+    font-weight: bold;
+    color: white;
+    background-color: purple;
+    border: 2px dashed white;
 }
 
 /*#endregion*/
 
-/*region Analytics Page*/
+/*#region Analytics Page*/
 
 #analytics-graphs-container
 {
@@ -63,22 +111,27 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 8px;
-    border: 2px solid black;
-    padding: 0px 10vw;
-    background-color: bisque;
 }
 
-.test-fill
+.graphs-graph
 {
     padding-bottom: 2vh;
+    width: 100%;
+    background-color: bisque;
+    border-radius: 8px;
+    border: 2px solid black;
+    padding: 2vh 2vw;
+    text-align: center;
 }
+
+/*#endregion*/
 
 #header-admin
 {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+    align-items: center;
     background-color: purple;
     padding: 2.5vh;
     color: white;
@@ -89,4 +142,22 @@
     padding: 0px 1vw;
 }
 
-/*endregion*/
+h1.admin
+{
+    border-bottom: 2px solid black;
+    padding: 2vh 0px;
+}
+
+.page-divider
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.admin-sidebar
+{
+    width: 150px;
+    height: 750px;
+    background-color: purple;
+    padding: auto;
+}
