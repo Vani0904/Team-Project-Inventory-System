@@ -3,11 +3,23 @@
     --main-color: #bb90db;
 }
 
+/*#region Across Many or All Pages*/
+body
+{
+    margin: 0px;
+}
+
 .container
 {
     display: flex;
     flex-direction: column;
     margin: auto;
+}
+
+.page-divider
+{
+    display: flex;
+    flex-direction: row;
 }
 
 .segment-margined
@@ -18,7 +30,135 @@
     margin-right: 1vw;
 }
 
-/*#region Invoice Page*/
+/*#endregion*/
+
+/*#region Registered User Homepage*/
+#navigation-sidebar
+{
+    width: 250px;
+    height: fit-content;
+    background-color: var(--main-color);
+    display:flex;
+    flex-direction: column;
+    color: white;
+    margin-left: 0.5vw;
+}
+
+#navigation-sidebar #breaker
+{
+    padding: 3vh 0px;
+    background-color: white;
+}
+
+#navigation-sidebar #brand, #price, strong
+{
+    display:flex;
+    flex-direction: column;
+    padding-left:15px;
+    padding-right:15px;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#navigation-sidebar #brand button, #price button
+{
+    text-align: left;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 15px;
+}
+
+#header-user
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--main-color);
+    padding: 2.5vh 1vw;
+    color: white;
+}
+
+#search-container
+{
+    border: 1px solid black;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+#search-container button, input
+{
+    background-color: transparent;
+    border: 0px;
+}
+
+#searchbar
+{
+    width: 700px;
+    padding: 10px 0px;
+}
+
+#header-user #left, #header-user #right
+{
+    display:flex;
+    flex-direction: column;
+}
+
+#header-user #right
+{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+#header-user #right .spaced
+{
+    margin: 1vh 0px;
+    padding: 1vh 0px;
+}
+
+#header-user #right button
+{
+    width: 100px;
+}
+
+
+#products-banner
+{
+    border: 1px solid black;
+    padding: 1vh 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#products-banner .section
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#products-grid-container
+{
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    gap: 20px 0px;
+}
+
+#products-grid-container .section
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/*#endregion*/
+
+/*#region Admin Invoice Page*/
 
 #invoice-table-filters
 {
@@ -102,7 +242,7 @@
 
 /*#endregion*/
 
-/*#region Analytics Page*/
+/*#region Admin Analytics Page*/
 
 #analytics-graphs-container
 {
@@ -132,6 +272,7 @@
 
 /*#endregion*/
 
+/*#region Across Admin Pages*/
 #header-admin
 {
     display: flex;
@@ -154,12 +295,6 @@ h1.admin
     padding: 2vh 0px;
 }
 
-.page-divider
-{
-    display: flex;
-    flex-direction: row;
-}
-
 .admin-sidebar
 {
     width: 150px;
@@ -167,3 +302,5 @@ h1.admin
     background-color: var(--main-color);
     padding: auto;
 }
+
+/*#endregion*/
