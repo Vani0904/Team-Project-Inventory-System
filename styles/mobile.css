@@ -158,6 +158,67 @@ body
 
 /*#endregion*/
 
+/*#region Registered User Basket*/
+#basket
+{
+    margin: auto;
+    padding: 5vw;
+    min-width: 1000px;
+}
+
+#basket-table
+{
+    width: 100%;
+}
+
+#basket-table thead tr th, tbody tr td
+{
+    text-align: center;
+}
+
+#basket-table tbody tr td button
+{
+    background-color: var(--main-color);
+    color: white;
+    padding: 10px 15px;
+    border: 0px;
+    border-radius: 10px;
+}
+
+#basket-price
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#checkout-container
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 20px;
+}
+
+#checkout-label
+{
+    background-color: var(--main-color);
+    color: white;
+    padding: 20px 50px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+#checkout-button
+{
+    background-color: var(--main-color);
+    color: white;
+    padding: 20px 25px;
+    border: 0px;
+}
+
+/*#endregion*/
+
 /*#region Admin Invoice Page*/
 
 #invoice-table-filters
@@ -275,13 +336,21 @@ body
 /*#region Across Admin Pages*/
 #header-admin
 {
+
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
     align-items: center;
+    justify-content: space-between;
     background-color: var(--main-color);
     padding: 2.5vh;
     color: white;
+}
+
+#header-admin #left, #header-admin #right
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .header-admin-item
