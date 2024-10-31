@@ -1,3 +1,8 @@
+:root 
+{
+    --main-color: #bb90db;
+}
+
 .container
 {
     display: flex;
@@ -40,7 +45,7 @@
 .element.ui
 {
     color: white;
-    background-color: purple;
+    background-color: var(--main-color);
     color-scheme: dark;
     border: none;
 }
@@ -63,7 +68,7 @@
 #invoice-table thead tr
 {
     text-align: left;
-    background: purple;
+    background: var(--main-color);
     color: white;
 }
 
@@ -74,7 +79,7 @@
 
 #invoice-table tbody tr
 {
-    border-bottom: 1px solid purple;
+    border-bottom: 1px solid var(--main-color);
 }
 
 #invoice-table tbody tr:nth-of-type(even)
@@ -91,7 +96,7 @@
 {
     font-weight: bold;
     color: white;
-    background-color: purple;
+    background-color: var(--main-color);
     border: 2px dashed white;
 }
 
@@ -133,7 +138,7 @@
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
-    background-color: purple;
+    background-color: var(--main-color);
     padding: 2.5vh;
     color: white;
 }
@@ -159,6 +164,6 @@ h1.admin
 {
     width: 150px;
     height: 750px;
-    background-color: purple;
+    background-color: var(--main-color);
     padding: auto;
 }

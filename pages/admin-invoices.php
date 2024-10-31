@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="../scripts/setdate.js" defer></script>
+    <script src="../scripts/selectionhandler.js" defer></script>
     <title>View Invoices</title>
 </head>
 
@@ -48,6 +49,7 @@
                     <table id="invoice-table">
                         <thead>
                             <tr>
+                                <th>Row Number</th>
                                 <th>Invoice ID</th>
                                 <th>User ID</th>
                                 <th>Issue Date</th>
@@ -56,28 +58,32 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr onclick="selectRow(this)">
+                                <td>0</td>
                                 <td>000</td>
                                 <td>00</td>
                                 <td>28th October 2024</td>
                                 <td>28th October 2024</td>
                                 <td>£400.54</td>
                             </tr>
-                            <tr>
+                            <tr onclick="selectRow(this)">
+                                <td>1</td>
                                 <td>001</td>
                                 <td>01</td>
                                 <td>28th October 2024</td>
                                 <td>28th October 2024</td>
                                 <td>£32.49</td>
                             </tr>
-                            <tr class="active">
+                            <tr onclick="selectRow(this)">
+                                <td>2</td>
                                 <td>002</td>
                                 <td>02</td>
                                 <td>28th October 2024</td>
                                 <td>28th October 2024</td>
                                 <td>£77.28</td>
                             </tr>
-                            <tr>
+                            <tr onclick="selectRow(this)">
+                                <td>3</td>
                                 <td>003</td>
                                 <td>03</td>
                                 <td>28th October 2024</td>
