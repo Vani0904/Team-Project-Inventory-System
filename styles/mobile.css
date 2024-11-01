@@ -1,29 +1,24 @@
-:root 
-{
+:root {
     --main-color: #bb90db;
 }
 
 /*#region Across Many or All Pages*/
-body
-{
+body {
     margin: 0px;
 }
 
-.container
-{
+.container {
     display: flex;
     flex-direction: column;
     margin: auto;
 }
 
-.page-divider
-{
+.page-divider {
     display: flex;
     flex-direction: row;
 }
 
-.segment-margined
-{
+.segment-margined {
     width: 100%;
     padding: 25px;
     margin-left: 1vw;
@@ -33,36 +28,35 @@ body
 /*#endregion*/
 
 /*#region Registered User Homepage*/
-#navigation-sidebar
-{
+#navigation-sidebar {
     width: 250px;
     height: fit-content;
     background-color: var(--main-color);
-    display:flex;
+    display: flex;
     flex-direction: column;
     color: white;
     margin-left: 0.5vw;
 }
 
-#navigation-sidebar #breaker
-{
+#navigation-sidebar #breaker {
     padding: 3vh 0px;
     background-color: white;
 }
 
-#navigation-sidebar #brand, #price, strong
-{
-    display:flex;
+#navigation-sidebar #brand,
+#price,
+strong {
+    display: flex;
     flex-direction: column;
-    padding-left:15px;
-    padding-right:15px;
+    padding-left: 15px;
+    padding-right: 15px;
     color: white;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
-#navigation-sidebar #brand button, #price button
-{
+#navigation-sidebar #brand button,
+#price button {
     text-align: left;
     background-color: transparent;
     border: 1px solid white;
@@ -70,8 +64,7 @@ body
     padding: 15px;
 }
 
-#header-user
-{
+#header-user {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -81,52 +74,46 @@ body
     color: white;
 }
 
-#search-container
-{
+#search-container {
     border: 1px solid black;
     border-radius: 5px;
     display: inline-block;
 }
 
-#search-container button, input
-{
+#search-container button,
+input {
     background-color: transparent;
     border: 0px;
 }
 
-#searchbar
-{
+#searchbar {
     width: 700px;
     padding: 10px 0px;
 }
 
-#header-user #left, #header-user #right
-{
-    display:flex;
+#header-user #left,
+#header-user #right {
+    display: flex;
     flex-direction: column;
 }
 
-#header-user #right
-{
+#header-user #right {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
 }
 
-#header-user #right .spaced
-{
+#header-user #right .spaced {
     margin: 1vh 0px;
     padding: 1vh 0px;
 }
 
-#header-user #right button
-{
+#header-user #right button {
     width: 100px;
 }
 
 
-#products-banner
-{
+#products-banner {
     border: 1px solid black;
     padding: 1vh 0px;
     display: flex;
@@ -134,23 +121,20 @@ body
     justify-content: space-evenly;
 }
 
-#products-banner .section
-{
+#products-banner .section {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#products-grid-container
-{
+#products-grid-container {
     margin-top: 20px;
     display: grid;
     grid-template-columns: 20% 20% 20% 20% 20%;
     gap: 20px 0px;
 }
 
-#products-grid-container .section
-{
+#products-grid-container .section {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -159,25 +143,22 @@ body
 /*#endregion*/
 
 /*#region Registered User Basket*/
-#basket
-{
+#basket {
     margin: auto;
     padding: 5vw;
     min-width: 1000px;
 }
 
-#basket-table
-{
+#basket-table {
     width: 100%;
 }
 
-#basket-table thead tr th, tbody tr td
-{
+#basket-table thead tr th,
+tbody tr td {
     text-align: center;
 }
 
-#basket-table tbody tr td button
-{
+#basket-table tbody tr td button {
     background-color: var(--main-color);
     color: white;
     padding: 10px 15px;
@@ -185,23 +166,20 @@ body
     border-radius: 10px;
 }
 
-#basket-price
-{
+#basket-price {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
 
-#checkout-container
-{
+#checkout-container {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     padding: 20px;
 }
 
-#checkout-label
-{
+#checkout-label {
     background-color: var(--main-color);
     color: white;
     padding: 20px 50px;
@@ -209,8 +187,7 @@ body
     border-bottom-left-radius: 20px;
 }
 
-#checkout-button
-{
+#checkout-button {
     background-color: var(--main-color);
     color: white;
     padding: 20px 25px;
@@ -221,80 +198,64 @@ body
 
 /*#region Admin Invoice Page*/
 
-#invoice-table-filters
-{
+#invoice-table-filters {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
 }
 
-#invoice-table-filters .filter
-{
+#invoice-table-filters .filter {
     display: flex;
     flex-direction: row;
     padding: 1vh 0px;
     align-items: center;
 }
 
-.element
-{
+.element {
     padding: 1vh 1vw;
     border-radius: 5px;
+    font-size: .75vh;
 }
 
-.element.ui
-{
+.element.ui {
     color: white;
     background-color: var(--main-color);
     color-scheme: dark;
     border: none;
 }
 
-#invoice-table-container
-{   
-
-}
-
-#invoice-table
-{
+#invoice-table {
     border-spacing: 0px;
     border-collapse: collapse;
     min-width: 100%;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
     margin: 2vh 0;
-    font-size: 1.5vh;
+    font-size: 1vh;
 }
 
-#invoice-table thead tr
-{
+#invoice-table thead tr {
     text-align: left;
     background: var(--main-color);
     color: white;
 }
 
-#invoice-table th, td
-{
+#invoice-table th,
+td {
     padding: 2vh 1vw;
 }
 
-#invoice-table tbody tr
-{
+#invoice-table tbody tr {
     border-bottom: 1px solid var(--main-color);
 }
 
-#invoice-table tbody tr:nth-of-type(even)
-{
-    background:lightgray;
+#invoice-table tbody tr:nth-of-type(even) {
+    background: lightgray;
 }
 
-#invoice-table tbody tr:last-of-type
-{
+#invoice-table tbody tr:last-of-type {
     border-bottom: 2px solid black;
 }
 
-#invoice-table tbody tr.active
-{
+#invoice-table tbody tr.active {
     font-weight: bold;
     color: white;
     background-color: var(--main-color);
@@ -305,37 +266,26 @@ body
 
 /*#region Admin Analytics Page*/
 
-#analytics-graphs-container
+#analytics-graphs-container 
 {
-    display:grid;
+    display: grid;
     grid-template-columns: 50% 50%;
     gap: 1vh 1vw;
     justify-items: center;
 }
 
-.graphs-item
+.graphs-item 
 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.graphs-graph
-{
-    padding-bottom: 2vh;
-    width: 100%;
-    background-color: bisque;
-    border-radius: 8px;
-    border: 2px solid black;
-    padding: 2vh 2vw;
+    font-size: 1vh;
     text-align: center;
+    width: 100%;
+    max-width: 250px;
 }
 
 /*#endregion*/
 
 /*#region Across Admin Pages*/
-#header-admin
-{
+#header-admin {
 
     display: flex;
     flex-direction: row;
@@ -346,26 +296,23 @@ body
     color: white;
 }
 
-#header-admin #left, #header-admin #right
-{
+#header-admin #left,
+#header-admin #right {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.header-admin-item
-{
+.header-admin-item {
     padding: 0px 1vw;
 }
 
-h1.admin
-{
+h1.admin {
     border-bottom: 2px solid black;
     padding: 2vh 0px;
 }
 
-.admin-sidebar
-{
+.admin-sidebar {
     width: 150px;
     height: 750px;
     background-color: var(--main-color);

@@ -2,6 +2,8 @@
 
 <head>
     <title>Analytics</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js" defer></script>
+    <script src="../scripts/piecharts.js" defer></script>
 </head>
 
 <body>
@@ -17,17 +19,12 @@
                 </div>
                 <div id="analytics-graphs-container">
                     <div class="graphs-item">
-                        <h2>Sales Orders</h2>
-                        <div class="graphs-graph">
-                            <label>Graph would go here</label>
-
-                        </div>
+                        <h2>Full Inventory Stock</h2>
+                        <canvas id="pieChartFull"></canvas>
                     </div>
                     <div class="graphs-item">
-                        <h2>Inventory Stock</h2>
-                        <div class="graphs-graph">
-                            <label>Graph would go here</label>
-                        </div>
+                        <h2>Branch Inventory Stock</h2>
+                        <canvas id="pieChartBranch"></canvas>
                     </div>
                 </div>
             </div>

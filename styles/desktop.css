@@ -1,0 +1,22 @@
+.graphs-item 
+{
+    font-size: 2.5vh;
+    max-width: 500px;
+}
+
+.element
+{
+    font-size: 1.15vh;
+}
+
+#invoice-table
+{
+    font-size: 1.5vh;
+}
+
+#invoice-table-filters 
+{
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

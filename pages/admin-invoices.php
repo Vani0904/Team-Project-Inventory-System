@@ -19,9 +19,6 @@
                 </div>
                 <div id="invoice-table-filters">
                     <div class="filter">
-                        <strong>Filters:</strong>
-                    </div>
-                    <div class="filter">
                         <label class="element">By User Id:</label>
                         <select class="element ui">
                             <option value="00">00</option>
