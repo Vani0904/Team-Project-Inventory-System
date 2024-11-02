@@ -1,3 +1,4 @@
+<?php //include '../includes/check-if-user.php'; ?> <!--This will be required once we have database integration.-->
 <?php include '../includes/head.php'; ?>
 
 <head>

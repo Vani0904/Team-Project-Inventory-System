@@ -74,44 +74,56 @@ strong {
     color: white;
 }
 
-#search-container {
+#search-container 
+{
+    display:flex;
     border: 1px solid black;
     border-radius: 5px;
-    display: inline-block;
+    align-items: center;
 }
 
-#search-container button,
-input {
+#search-container button, #search-container input, #basket-button
+{
     background-color: transparent;
     border: 0px;
 }
 
-#searchbar {
+#basket-button,  #search-button
+{
+    width: 40px;
+}
+
+#searchbar 
+{
     width: 700px;
     padding: 10px 0px;
 }
 
 #header-user #left,
-#header-user #right {
+#header-user #right 
+{
     display: flex;
     flex-direction: column;
 }
 
-#header-user #right {
-    display: flex;
-    flex-direction: column;
+#header-user #right 
+{
     align-items: flex-end;
 }
 
-#header-user #right .spaced {
+#header-user #right .spaced 
+{
     margin: 1vh 0px;
     padding: 1vh 0px;
 }
 
-#header-user #right button {
+#button-logout
+{
     width: 100px;
+    background-color: transparent;
+    border: 0px;
+    color: white;
 }
-
 
 #products-banner {
     border: 1px solid black;
