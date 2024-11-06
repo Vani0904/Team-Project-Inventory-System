@@ -304,7 +304,7 @@ td {
     align-items: center;
     justify-content: space-between;
     background-color: var(--main-color);
-    padding: 2.5vh;
+    padding: 1vh;
     color: white;
 }
 
@@ -330,5 +330,69 @@ h1.admin {
     background-color: var(--main-color);
     padding: auto;
 }
+
+/*#endregion*/
+
+/*#region Register and Login Page*/
+
+.main-container {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 0px;
+  }
+
+.main-container .user-form{
+  padding: 50px 15px;
+  border-radius: 3px;
+   box-shadow: 0 5px 10px rgba(0,0,0,.1);
+   background: #fff;
+   text-align: center;
+   width: 470px;
+ 
+ }
+ .main-container .user-form h3{
+   font-size: 28px;
+   text-transform: uppercase;
+   margin-bottom: 20px;
+   color:#333;
+ }
+ .main-container .user-form input{
+   width: 95%;
+   padding:10px 5px;
+   font-size: 15px;
+   margin:7px 0;
+   background: #eee;
+   border-radius: 5px;
+ }
+ .main-container .user-form .form-btn{
+   width: 70%;
+   background: var(--main-color);
+   color: white;
+   text-transform: capitalize;
+   font-size: 20px;
+   cursor: pointer;
+   margin-top: 20px;
+ }
+ .main-container .user-form .form-btn:hover{
+   background: #778899;
+   color:#fff;
+ }
+ .main-container .user-form p{
+  margin-top: 10px;
+   font-size: 20px;
+   color:#333;
+ }
+ .main-container .user-form p a{
+   color:#3f6184;
+ }
+ 
+ .main-container .user-form p a:hover{
+  color:black;
+ }
 
 /*#endregion*/

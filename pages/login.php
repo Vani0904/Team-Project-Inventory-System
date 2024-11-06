@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css" />
-        <link rel="stylesheet" media="only screen and (min-device-width: 737px)" href="style.css" />
+    <link rel="stylesheet" href="mobile.css" />
+        <link rel="stylesheet" media="only screen and (min-device-width: 737px)" href="../styles/mobile.css" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elegance Scent</title>
 </head>
 <body>
     <div class="main-container">
-    <?php include '../includes/login.php'; ?>
+    <?php //include '../includes/login.php'; //?>
         <form class = "user-form" action="loginconfig.php" method="post">
         <h3>Login</h3>
               <input type="email" name="email" required placeholder="Email">

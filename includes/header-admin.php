@@ -1,6 +1,6 @@
 <header id="header-admin">
     <div id="left">
-        <img src="" alt="company logo" width="150" height="75">
+        <img src="../images/logo_white.png" alt="company logo" width="125" height="125">
     </div>
     <div id="right">
         <label class="header-admin-item">First Name</label>

@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css" />
-        <link rel="stylesheet" media="only screen and (min-device-width: 737px)" href="style.css" />
+    <link rel="stylesheet" href="mobile.css" />
+        <link rel="stylesheet" media="only screen and (min-device-width: 737px)" href="../styles/mobile.css"  />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
 </head>
 <body>
     <div class="main-container">
-        <?php include '../includes/register.php'; ?>
+        <?php //include '../includes/register.php'; //?>
 
         <form class ="user-form" action="register.php" method="post">
            <h3>Signup</h3>
