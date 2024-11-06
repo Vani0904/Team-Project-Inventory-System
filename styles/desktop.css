@@ -53,6 +53,9 @@
 .nav-menu a{
     margin: 20px 0;
 }
+.nav-menu img[src="../images/logo_main.png"]{
+    width: 110px;
+}
 .header-admin img[src="../images/log-out-icon.png"]{
     cursor: pointer;
 }
