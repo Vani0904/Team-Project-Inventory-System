@@ -9,13 +9,13 @@ body {
 
 .container {
     display: flex;
-    flex-direction: column;
-    margin: auto;
+    min-height: 100vh;
 }
 
 .page-divider {
     display: flex;
     flex-direction: row;
+    width: 100%;
 }
 
 .segment-margined {
@@ -29,18 +29,19 @@ body {
 
 /*#region Registered User Homepage*/
 #navigation-sidebar {
-    width: 250px;
-    height: fit-content;
     background-color: var(--main-color);
+    width: 250px;
+    padding:20px;
     display: flex;
     flex-direction: column;
+    top: 0;
+    left: 0;
     color: white;
-    margin-left: 0.5vw;
 }
 
 #navigation-sidebar #breaker {
     padding: 3vh 0px;
-    background-color: white;
+    background-color: transparent;
 }
 
 #navigation-sidebar #brand,
@@ -69,7 +70,6 @@ strong {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--main-color);
     padding: 2.5vh 1vw;
     color: white;
 }
@@ -88,15 +88,28 @@ strong {
     border: 0px;
 }
 
+#basket-button-container
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 #basket-button,  #search-button
 {
     width: 40px;
+}
+
+#basket-label
+{
+    color: var(--main-color);
 }
 
 #searchbar 
 {
     width: 700px;
     padding: 10px 0px;
+    margin-left: 1em;
 }
 
 #header-user #left,
@@ -203,6 +216,20 @@ tbody tr td {
     background-color: var(--main-color);
     color: white;
     padding: 20px 25px;
+    border: 0px;
+}
+
+#return
+{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: var(--main-color);
+}
+
+#return-button
+{
+    background-color: transparent;
     border: 0px;
 }
 
@@ -322,13 +349,6 @@ td {
 h1.admin {
     border-bottom: 2px solid black;
     padding: 2vh 0px;
-}
-
-.admin-sidebar {
-    width: 150px;
-    height: 750px;
-    background-color: var(--main-color);
-    padding: auto;
 }
 
 /*#endregion*/

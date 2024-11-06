@@ -6,8 +6,14 @@
 
 <body>
     <div class="container">
-        <?php include '../includes/header-admin.php'; ?>
         <div id="basket">
+            <?php include '../includes/header-admin.php'; ?>
+            <div id="return">
+                <button id="return-button" onclick="window.location.href='user-home.php'"><img
+                        src="../images/icon-return.png" alt="return to previous page button icon" width="30px"
+                        height="30px"></button>
+                <p>Return</p>
+            </div>
             <h1>Shopping Cart</h1>
             <table id="basket-table">
                 <thead>
@@ -44,8 +50,8 @@
             <div id="checkout-container">
                 <form>
                     <label id="checkout-label">Checkout</label>
-                    <button id="checkout-button" type="submit"><img src="../images/search-icon.png" alt="search button magnifying glass"
-                            width="12.5px" height="12.5px"></button>
+                    <button id="checkout-button" type="submit"><img src="../images/icon-search-white.png"
+                            alt="search button magnifying glass" width="12.5px" height="12.5px"></button>
                 </form>
             </div>
         </div>
