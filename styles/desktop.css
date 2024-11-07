@@ -6,30 +6,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.graphs-item 
-{
-    font-size: 2.25vh;
-    max-width: 500px;
-}
-
-.element
-{
-    font-size: 1.15vh;
-}
-
-#invoice-table
-{
-    font-size: 1.5vh;
-}
-
-#invoice-table-filters 
-{
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Admin Dashboard */
+/*#region Admin Dashboard*/
 .dashboard-row{
     display: flex;
     min-width: 100%;
@@ -286,3 +263,31 @@ h1{
     }
 
 }
+/*#endregion*/
+
+/*#region Admin Analytics Page*/
+.graphs-item 
+{
+    font-size: 0.75em;
+}
+
+#analytics-graphs-container 
+{
+    gap: 0.5em;
+}
+
+/*#endregion*/
+
+/*#region Admin Invoices Page*/
+
+#invoice-table-filters 
+{
+    justify-content: space-between;
+}
+
+#invoice-table thead tr, #invoice-table tbody tr td, .element
+{ 
+    font-size: .9em;
+}
+
+/*#endregion*/

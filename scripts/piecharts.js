@@ -13,7 +13,7 @@ const pieChartFull = new Chart(ctx,
           data: [100, 50, 75, 120],
           backgroundColor: colorHex
         }],
-      labels: labels
+      //labels: labels
     },
     options:
     {
@@ -38,7 +38,7 @@ const pieChartFull = new Chart(ctx,
           },
           font:
           {
-            weight: 'bold',
+            weight: 'regular',
             size: '10'
           },
           formatter: (value) => {
@@ -59,7 +59,7 @@ const pieChartBranch = new Chart(ctx2,
           data: [15, 25, 35, 80],
           backgroundColor: colorHex
         }],
-      labels: labels
+      //labels: labels
     },
     options:
     {
@@ -84,7 +84,7 @@ const pieChartBranch = new Chart(ctx2,
           },
           font:
           {
-            weight: 'bold',
+            weight: 'regular',
             size: '10'
           },
           formatter: (value) => {

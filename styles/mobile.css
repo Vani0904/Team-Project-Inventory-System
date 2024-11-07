@@ -3,10 +3,6 @@
 }
 
 /*#region Across Many or All Pages*/
-body {
-    margin: 0px;
-}
-
 .container {
     display: flex;
     min-height: 100vh;
@@ -19,11 +15,12 @@ body {
 }
 
 .segment-margined {
-    width: 100%;
-    padding: 25px;
+    flex-grow: 1;
+    padding: 20px;
     margin-left: 1vw;
     margin-right: 1vw;
 }
+
 
 /*#endregion*/
 
@@ -31,7 +28,7 @@ body {
 #navigation-sidebar {
     background-color: var(--main-color);
     width: 250px;
-    padding:20px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     top: 0;
@@ -74,64 +71,57 @@ strong {
     color: white;
 }
 
-#search-container 
-{
-    display:flex;
+#search-container {
+    display: flex;
     border: 1px solid black;
     border-radius: 5px;
     align-items: center;
 }
 
-#search-container button, #search-container input, #basket-button
-{
+#search-container button,
+#search-container input,
+#basket-button {
     background-color: transparent;
     border: 0px;
 }
 
-#basket-button-container
-{
+#basket-button-container {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-#basket-button,  #search-button
-{
+#basket-button,
+#search-button {
     width: 40px;
 }
 
-#basket-label
-{
+#basket-label {
     color: var(--main-color);
 }
 
-#searchbar 
-{
+#searchbar {
     width: 700px;
     padding: 10px 0px;
     margin-left: 1em;
 }
 
 #header-user #left,
-#header-user #right 
-{
+#header-user #right {
     display: flex;
     flex-direction: column;
 }
 
-#header-user #right 
-{
+#header-user #right {
     align-items: flex-end;
 }
 
-#header-user #right .spaced 
-{
+#header-user #right .spaced {
     margin: 1vh 0px;
     padding: 1vh 0px;
 }
 
-#button-logout
-{
+#button-logout {
     width: 100px;
     background-color: transparent;
     border: 0px;
@@ -219,16 +209,14 @@ tbody tr td {
     border: 0px;
 }
 
-#return
-{
+#return {
     display: flex;
     align-items: center;
     gap: 20px;
     color: var(--main-color);
 }
 
-#return-button
-{
+#return-button {
     background-color: transparent;
     border: 0px;
 }
@@ -239,20 +227,19 @@ tbody tr td {
 
 #invoice-table-filters {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 1em;
 }
 
 #invoice-table-filters .filter {
-    display: flex;
-    flex-direction: row;
     padding: 1vh 0px;
-    align-items: center;
 }
 
 .element {
     padding: 1vh 1vw;
     border-radius: 5px;
-    font-size: .75vh;
+    font-size: 0.75em;
 }
 
 .element.ui {
@@ -262,24 +249,34 @@ tbody tr td {
     border: none;
 }
 
+#invoice-table-container
+{
+    overflow-x: auto;
+    width: 100%;
+}
+
 #invoice-table {
     border-spacing: 0px;
     border-collapse: collapse;
     min-width: 100%;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
     margin: 2vh 0;
-    font-size: 1vh;
+    font-size: 1em;
 }
 
 #invoice-table thead tr {
-    text-align: left;
     background: var(--main-color);
     color: white;
+    text-align: left;
 }
 
-#invoice-table th,
-td {
-    padding: 2vh 1vw;
+#invoice-table tbody tr td
+{ 
+    text-align: left;
+}
+
+#invoice-table th, #invoice-table td {
+    padding: 1em;
 }
 
 #invoice-table tbody tr {
@@ -305,46 +302,21 @@ td {
 
 /*#region Admin Analytics Page*/
 
-#analytics-graphs-container 
-{
-    display: grid;
-    grid-template-columns: 50% 50%;
-    gap: 1vh 1vw;
-    justify-items: center;
-}
-
 .graphs-item 
 {
-    font-size: 1vh;
+    font-size: 1em;
     text-align: center;
-    width: 100%;
-    max-width: 250px;
+}
+
+#analytics-graphs-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-items: center;
 }
 
 /*#endregion*/
 
 /*#region Across Admin Pages*/
-#header-admin {
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    background-color: var(--main-color);
-    padding: 1vh;
-    color: white;
-}
-
-#header-admin #left,
-#header-admin #right {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.header-admin-item {
-    padding: 0px 1vw;
-}
 
 h1.admin {
     border-bottom: 2px solid black;
@@ -354,65 +326,209 @@ h1.admin {
 /*#endregion*/
 
 /*#region Register and Login Page*/
-
 .main-container {
-  min-height: 100vh;
-  width: 100%;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-  padding: 0px;
-  }
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 0px;
+}
 
-.main-container .user-form{
-  padding: 50px 15px;
-  border-radius: 3px;
-   box-shadow: 0 5px 10px rgba(0,0,0,.1);
-   background: #fff;
-   text-align: center;
-   width: 470px;
- 
- }
- .main-container .user-form h3{
-   font-size: 28px;
-   text-transform: uppercase;
-   margin-bottom: 20px;
-   color:#333;
- }
- .main-container .user-form input{
-   width: 95%;
-   padding:10px 5px;
-   font-size: 15px;
-   margin:7px 0;
-   background: #eee;
-   border-radius: 5px;
- }
- .main-container .user-form .form-btn{
-   width: 70%;
-   background: var(--main-color);
-   color: white;
-   text-transform: capitalize;
-   font-size: 20px;
-   cursor: pointer;
-   margin-top: 20px;
- }
- .main-container .user-form .form-btn:hover{
-   background: #778899;
-   color:#fff;
- }
- .main-container .user-form p{
-  margin-top: 10px;
-   font-size: 20px;
-   color:#333;
- }
- .main-container .user-form p a{
-   color:#3f6184;
- }
- 
- .main-container .user-form p a:hover{
-  color:black;
- }
+.main-container .user-form {
+    padding: 50px 15px;
+    border-radius: 3px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+    background: #fff;
+    text-align: center;
+    width: 470px;
+
+}
+
+.main-container .user-form h3 {
+    font-size: 28px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.main-container .user-form input {
+    width: 95%;
+    padding: 10px 5px;
+    font-size: 15px;
+    margin: 7px 0;
+    background: #eee;
+    border-radius: 5px;
+}
+
+.main-container .user-form .form-btn {
+    width: 70%;
+    background: var(--main-color);
+    color: white;
+    text-transform: capitalize;
+    font-size: 20px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.main-container .user-form .form-btn:hover {
+    background: #778899;
+    color: #fff;
+}
+
+.main-container .user-form p {
+    margin-top: 10px;
+    font-size: 20px;
+    color: #333;
+}
+
+.main-container .user-form p a {
+    color: #3f6184;
+}
+
+.main-container .user-form p a:hover {
+    color: black;
+}
+
+/*#endregion*/
+
+/*#region Integrating "@media only" which is in Desktop.css*/
+
+@media only screen and (max-width: 1000px) {
+    .Kpi {
+        flex-wrap: wrap;
+    }
+
+    .Kpi div {
+        flex: 1 1 40%;
+        margin: 10px;
+    }
+}
+
+@media only screen and (max-width: 710px) {
+    .filter-inputs {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #search-inventory-product {
+        margin: 10px 0;
+    }
+}
+
+@media only screen and (max-width: 654px) {
+    .inventory-table td:last-of-type {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .delete-item-btn {
+        margin: 10px 0 0 0;
+    }
+
+    .nav-btns {
+        justify-content: center;
+    }
+
+    .nav-btns a {
+        margin: 10px;
+    }
+}
+
+@media only screen and (max-width: 737px) {
+    .dashboard-row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .admin-db-container {
+        flex-direction: column;
+    }
+
+    .nav-menu {
+        top: 100px;
+        left: -100%;
+        width: 200px;
+        position: fixed;
+        height: 100vh;
+        background-color: rgb(46, 46, 46);
+        transition: all 0.3s;
+        z-index: 1;
+    }
+
+    .header-admin img[src="../images/admin-dashboard-menu-icon-black.png"] {
+        height: 40px;
+    }
+
+    .filter-inputs {
+        margin: 10px 0;
+    }
+
+    .table-container {
+        overflow-x: auto;
+        width: 100%;
+    }
+
+    .inventory-table {
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .inventory-table thead {
+        display: none;
+    }
+
+    .inventory-table td {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px;
+        text-align: center;
+        border: 1px solid #cecece;
+    }
+
+    .inventory-table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+    }
+
+    .inventory-table tr {
+        margin: 10px 0;
+    }
+
+    .hamburger-icon {
+        display: block;
+        cursor: pointer;
+    }
+
+    .header-admin {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+    }
+
+    .header-admin-icon:first-of-type {
+        display: none;
+    }
+
+    .header-admin-details {
+        display: none;
+    }
+
+    #menu-toggle:checked~.nav-menu {
+        left: 0px;
+    }
+}
+
+@media only screen and (max-width: 406px) {
+    .filter-inputs input[type="text"] {
+        padding: 4px 8px;
+        margin-top: 3px;
+
+    }
+
+}
 
 /*#endregion*/

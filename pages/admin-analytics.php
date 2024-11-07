@@ -10,12 +10,7 @@
 <body>
     <div class="container">
         <div class="page-divider">
-            <nav class="nav-menu">
-                <img src="../images/logo_main.png" alt="logo">
-                <a href="admin-dashboard.php"><img src="../images/dashboard-icon.png" alt="dashboard icon"></a>
-                <a href="admin-analytics.php"><img src="../images/analytics-icon.png" alt="analytics icon"></a>
-                <a href="admin-invoices.php"><img src="../images/invoices-icon.png" alt="invoices icon"></a>
-            </nav>
+            <?php include '../includes/nav-menu.php'; ?>
             <div class="segment-margined">
                 <?php include '../includes/header-admin.php'; ?>
                 <div>
@@ -23,11 +18,11 @@
                 </div>
                 <div id="analytics-graphs-container">
                     <div class="graphs-item">
-                        <h2>Full Inventory Stock</h2>
+                        <h2>Full Inventory</h2>
                         <canvas id="pieChartFull"></canvas>
                     </div>
                     <div class="graphs-item">
-                        <h2>Branch Inventory Stock</h2>
+                        <h2>Branch Inventory</h2>
                         <canvas id="pieChartBranch"></canvas>
                     </div>
                 </div>
