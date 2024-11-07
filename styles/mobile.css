@@ -3,6 +3,11 @@
 }
 
 /*#region Across Many or All Pages*/
+body
+{
+    margin: 0px;
+}
+
 .container {
     display: flex;
     min-height: 100vh;
