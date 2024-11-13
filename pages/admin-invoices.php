@@ -1,4 +1,19 @@
 <?php //include '../includes/check-if-admin.php'; ?> <!--This will be required once we have database integration.-->
+
+<?php
+include "../includes/connectdb.php";
+
+$all_invoices = "SELECT * FROM invoice";
+$all_invoices_result = mysqli_query($connection, $all_invoices);
+
+if (mysqli_num_rows($all_invoices_result) != 0) {
+    $invoice_count = mysqli_num_rows($all_invoices_result);
+}
+
+$current_row = 0;
+
+?>
+
 <?php include '../includes/head.php'; ?>
 
 <head>
@@ -39,45 +54,29 @@
                             <tr>
                                 <th>Row Number</th>
                                 <th>Invoice ID</th>
-                                <th>User ID</th>
+                                <th>Customer Order ID</th>
                                 <th>Issue Date</th>
                                 <th>Payment Date</th>
                                 <th>Total Cost</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr onclick="selectRow(this)">
-                                <td>0</td>
-                                <td>000</td>
-                                <td>00</td>
-                                <td>28th October 2024</td>
-                                <td>28th October 2024</td>
-                                <td>£400.54</td>
-                            </tr>
-                            <tr onclick="selectRow(this)">
-                                <td>1</td>
-                                <td>001</td>
-                                <td>01</td>
-                                <td>28th October 2024</td>
-                                <td>28th October 2024</td>
-                                <td>£32.49</td>
-                            </tr>
-                            <tr onclick="selectRow(this)">
-                                <td>2</td>
-                                <td>002</td>
-                                <td>02</td>
-                                <td>28th October 2024</td>
-                                <td>28th October 2024</td>
-                                <td>£77.28</td>
-                            </tr>
-                            <tr onclick="selectRow(this)">
-                                <td>3</td>
-                                <td>003</td>
-                                <td>03</td>
-                                <td>28th October 2024</td>
-                                <td>28th October 2024</td>
-                                <td>£1,103.26</td>
-                            </tr>
+                            <?php
+                            while ($row = mysqli_fetch_assoc($all_invoices_result)) 
+                            {
+                                $current_row++;
+                                ?>
+                                <tr onclick="selectRow(this)">
+                                    <td><?php echo $current_row; ?></td>
+                                    <td><?php echo $row['invoice_id']; ?></td>
+                                    <td><?php echo $row['customer_order_id']; ?></td>
+                                    <td><?php echo $row['invoice_date']; ?></td>
+                                    <td><?php echo $row['payment_date']; ?></td>
+                                    <td><?php echo $row['total_cost']; ?></td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
