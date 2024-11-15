@@ -43,13 +43,14 @@
                 <div>
                     <label for="category"><strong>Item category:</strong></label>
                     <select id="category" name="category">
-                        <option value=""></option>
-                        <option value=""></option>
+                        <option value="Perfume">Perfume</option>
+                        <option value="deodorant">Deodorant </option>
+                        <option value="Saint Laurent">Saint Laurent</option>
                     </select>
                 </div>
                 <div id="search-inventory-product">
                     <label for="search-product"><strong>Search for product:</strong></label>
-                    <input type="text" id="search-product" placeholder="Search..." name="search-product">
+                    <input type="text" id="search-product" placeholder="Search..." name="search-product" aria-label="Search for product">
                 </div>
             </div>
             <div class="table-container">
