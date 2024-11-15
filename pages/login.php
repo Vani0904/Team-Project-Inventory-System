@@ -12,7 +12,7 @@
     <?php //include '../includes/login.php'; //?>
         <form class = "user-form" action="loginconfig.php" method="post">
         <h3>Login</h3>
-              <input type="email" name="email" required placeholder="Email">
+              <input type="username" name="username" required placeholder="Username">
               <input type="password" name="password" required placeholder="Password">
               <input type="submit" name="submit" value="Login" class="form-btn">
               <p>or <a href="register.php">Sign up</a></p>

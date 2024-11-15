@@ -1,6 +1,4 @@
 {
-    "cSpell.words": [
-        "datalabels",
-        "searchbar"
-    ]
+  "cSpell.words": ["datalabels", "searchbar"],
+  "liveServer.settings.port": 5501
 }
