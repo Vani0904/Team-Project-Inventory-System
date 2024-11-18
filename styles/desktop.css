@@ -312,7 +312,7 @@ html {
        padding:2rem 9%;
    }
    
-   header {
+   header .guest {
     position: fixed;
     top: 0;
     left: 0;
