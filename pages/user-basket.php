@@ -20,11 +20,13 @@ FROM cart_items INNER JOIN products ON cart_items.product_id = products.product_
 
 $result_items_full_info_and_quantity = mysqli_query($connection, $items_full_info_and_quantity );
 
+$invoice_description = "";
+
 #endregion
 
 #region For Generating Invoice on Checkout
 
-$users_name_and_address = "SELECT CONCAT(first_name, ' ', surname) AS full_name, CONCAT(address_1, ',', address_2, ',', address_3, ',', postcode) AS 'address' FROM users WHERE user_id = '$user_id'";
+$users_name_and_address = "SELECT CONCAT(first_name, ' ', middle_name, ' ', surname) AS full_name, CONCAT(address_1, ',', address_2, ',', address_3, ',', postcode) AS 'address' FROM users WHERE user_id = '$user_id'";
 $result_users_name_and_address = mysqli_query($connection, $users_name_and_address);
 $users_name_and_address_assoc = mysqli_fetch_assoc($result_users_name_and_address);
 $user_full_name = $users_name_and_address_assoc['full_name'];
@@ -51,9 +53,10 @@ function generate_invoice()
     global $user_full_address;
     global $cart_id;
 
+    $total_cost = floatval($total_cost);
+
     $template_supplier_name = "Sheffield";
     $template_supplier_address_1 = "30 Brown Ln";
-    $template_supplier_address_2 = NULL;
     $template_supplier_address_3 = "Sheffield";
     $template_supplier_postcode = "S12 NH";
 
@@ -65,11 +68,12 @@ function generate_invoice()
     $user_postcode = $user_address_exploded[3];
 
     $invoice_date = date('Y-m-d H:i:s');
+
     $create_invoice = "INSERT INTO invoices (user_id, invoice_date, payment_date, total_cost,
     supplier_name, supplier_address_1, supplier_address_2, supplier_address_3, supplier_postcode, 
     customer_name, customer_address_1, customer_address_2, customer_address_3, customer_postcode) 
     VALUES ('$user_id', '$invoice_date', NULL, '$total_cost',
-    '$template_supplier_name', '$template_supplier_address_1', '$template_supplier_address_2', '$template_supplier_address_3', '$template_supplier_postcode',
+    '$template_supplier_name', '$template_supplier_address_1', NULL, '$template_supplier_address_3', '$template_supplier_postcode',
     '$user_full_name', '$user_address_1', '$user_address_2', '$user_address_3', '$user_postcode'
     )";
     mysqli_query($connection, $create_invoice);
@@ -111,17 +115,18 @@ function generate_invoice()
                 </thead>
                 <tbody>
                     <?php
-                    $subtotal = 0;
+                    $subtotal = 0.00;
                     $delivery_fee = 2.99;
-                    $total_cost = 0;
+                    $total_cost = 0.00;
                     while ($row = mysqli_fetch_assoc($result_items_full_info_and_quantity)) {
                         $product_details = $row['manufacturer'] . ": " . $row['name'];
                         $quantity = (int) $row['quantity'];
                         $price = (float) $row['unit_price'];
                         $total_individual = $quantity * $price;
                         $subtotal += $total_individual;
-                        $total_cost = $subtotal + $delivery_fee;
+                        $total_cost += (float)$subtotal;
                         $image = $row['image'];
+                        $invoice_description += $quantity . $product_details . '@' . $subtotal;
                         ?>
                         <tr>
                             <td><?php echo '<img src="data:image/png;base64,' . base64_encode($image) . '" width=25%/>'; ?>
@@ -136,6 +141,7 @@ function generate_invoice()
                     }
                     ?>
                     <tr>
+                        <?php $total_cost += $delivery_fee; ?>
                         <td></td><!-- Blank TD to ensure position of below elements -->
                         <td></td><!-- Blank TD to ensure position of below elements -->
                         <td></td><!-- Blank TD to ensure position of below elements -->

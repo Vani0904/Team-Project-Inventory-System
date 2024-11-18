@@ -68,7 +68,7 @@
                     </thead>
                     <tbody>
                         <?php
-                            $query = "SELECT * FROM product";
+                            $query = "SELECT * FROM products";
                             $result = mysqli_query($connection,$query);
 
                             if (mysqli_num_rows($result) > 0)

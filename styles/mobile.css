@@ -297,11 +297,6 @@ tbody tr td {
     border: 2px dashed white;
 }
 
-#invoice-popup-container
-{
-    display: none;
-}
-
 /*#endregion*/
 
 /*#region Admin Analytics Page*/
@@ -397,6 +392,44 @@ h1.admin {
 }
 
 /*#endregion*/
+
+/*#region Generated Invoice Page*/
+
+h1#generated-invoice-h1
+{
+    font-size: 5em;
+}
+
+#generated-invoice-container
+{
+    margin-top: 75px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 620px;
+    height: 877px;
+    padding: 0px 50px;
+    box-shadow: 0px 0px 10px black;
+    border-radius: 40px;
+}
+
+#generated-invoice-header, #generated-invoice-addresses
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#generated-invoice-main-body
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 100px;
+}
+
+/*#endregion*/
+
 
 /*#region Integrating "@media only" which is in Desktop.css*/
 

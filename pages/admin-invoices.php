@@ -4,7 +4,7 @@
 include "../includes/connectdb.php";
 
 $all_invoices = "SELECT invoices.invoice_id, invoices.user_id, invoices.invoice_date, invoices.payment_date, invoices.total_cost, 
-CONCAT(users.first_name, ' ', users.surname) AS full_name FROM invoices INNER JOIN users ON invoices.user_id = users.user_id";
+users.first_name, users.middle_name, users.surname FROM invoices INNER JOIN users ON invoices.user_id = users.user_id";
 
 $all_invoices_result = mysqli_query($connection, $all_invoices);
 
@@ -15,6 +15,7 @@ $all_invoices_result = mysqli_query($connection, $all_invoices);
 <head>
     <script src="../scripts/setdate.js" defer></script>
     <script src="../scripts/invoicetoggle.js" defer></script>
+    <script src="../scripts/identifyinvoice.js" defer></script>
     <title>View Invoices</title>
 </head>
 
@@ -61,24 +62,23 @@ $all_invoices_result = mysqli_query($connection, $all_invoices);
                         </thead>
                         <tbody>
                             <?php
-                            while ($row = mysqli_fetch_assoc($all_invoices_result)) 
-                            {
+                            mysqli_data_seek($all_invoices_result, 0);
+                            while ($row = mysqli_fetch_assoc($all_invoices_result)) {
                                 $invoice_id = $row['invoice_id'];
                                 $user_id = $row['user_id'];
-                                $users_name = $row['full_name'];
+                                $users_name = $row['first_name'] . ' ' . $row['middle_name'] . ' ' . $row['surname'];
                                 $invoice_date = $row['invoice_date'];
                                 $payment_date = $row['payment_date'] ? $row['payment_date'] : 'Unpaid';
-                                $total_cost = (float)$row['total_cost'];
+                                $total_cost = (float) $row['total_cost'];
                                 ?>
                                 <tr>
-                                    <td><?php echo $invoice_id; ?></td>
-                                    <td><?php echo $user_id; ?></td>
-                                    <td><?php echo $users_name; ?></td>
-                                    <td><?php echo $invoice_date; ?></td>
+                                    <td name="id"><?php echo $invoice_id; ?></td>
+                                    <td name="user_id"><?php echo $user_id; ?></td>
+                                    <td name="user_name"><?php echo $users_name; ?></td>
+                                    <td name="date"><?php echo $invoice_date; ?></td>
                                     <td><?php echo $payment_date; ?></td>
-                                    <td><?php echo $total_cost; ?></td>
-                                    <td><button onclick="toggleVisible('#invoice-popup-container')" class="open-invoice">Open
-                                            Invoice</button></td>
+                                    <td name="cost"><?php echo $total_cost; ?></td>
+                                    <td><button onclick="loadInvoice(this)" class="open-invoice">Open Invoice</button></td>
                                 </tr>
                                 <?php
                             }
@@ -86,14 +86,6 @@ $all_invoices_result = mysqli_query($connection, $all_invoices);
                             ?>
                         </tbody>
                     </table>
-                </div>
-                <div id="invoice-popup-container">
-                    <div id="invoice-popup">
-                        <div id="invoice-popup-close">
-                            X;
-                        </div>
-                        <h2>Invoice: </h2>
-                    </div>
                 </div>
             </div>
         </div>
