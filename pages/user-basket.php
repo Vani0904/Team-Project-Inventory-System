@@ -20,8 +20,6 @@ FROM cart_items INNER JOIN products ON cart_items.product_id = products.product_
 
 $result_items_full_info_and_quantity = mysqli_query($connection, $items_full_info_and_quantity );
 
-$invoice_description = "";
-
 #endregion
 
 #region For Generating Invoice on Checkout
@@ -31,6 +29,20 @@ $result_users_name_and_address = mysqli_query($connection, $users_name_and_addre
 $users_name_and_address_assoc = mysqli_fetch_assoc($result_users_name_and_address);
 $user_full_name = $users_name_and_address_assoc['full_name'];
 $user_full_address = $users_name_and_address_assoc['address'];
+
+$invoice_description = "";
+$subtotal = 0.00;
+$delivery_fee = 2.99;
+$total_cost = 0.00;
+
+while ($row = mysqli_fetch_assoc($result_items_full_info_and_quantity)) 
+{
+    $total_individual = $row['quantity'] * $row['unit_price'];
+    $subtotal += $total_individual;
+    $invoice_description .= $row['quantity'] . '*' . $row['manufacturer'] . "(" . $row['name'] . ")"  . '@' . $subtotal . "\n";
+}
+
+$total_cost = $subtotal + $delivery_fee; //Include the delivery fee.
 
 if(isset($_POST['checkout-button']))
 {
@@ -52,8 +64,7 @@ function generate_invoice()
     global $user_full_name;
     global $user_full_address;
     global $cart_id;
-
-    $total_cost = floatval($total_cost);
+    global $invoice_description;
 
     $template_supplier_name = "Sheffield";
     $template_supplier_address_1 = "30 Brown Ln";
@@ -68,11 +79,14 @@ function generate_invoice()
     $user_postcode = $user_address_exploded[3];
 
     $invoice_date = date('Y-m-d H:i:s');
+    $total_cost = floatval($total_cost);
 
-    $create_invoice = "INSERT INTO invoices (user_id, invoice_date, payment_date, total_cost,
+    $invoice_description = str_replace("'", "", $invoice_description);
+
+    $create_invoice = "INSERT INTO invoices (user_id, invoice_description, invoice_date, payment_date, total_cost,
     supplier_name, supplier_address_1, supplier_address_2, supplier_address_3, supplier_postcode, 
     customer_name, customer_address_1, customer_address_2, customer_address_3, customer_postcode) 
-    VALUES ('$user_id', '$invoice_date', NULL, '$total_cost',
+    VALUES ($user_id, '$invoice_description', '$invoice_date', NULL, $total_cost,
     '$template_supplier_name', '$template_supplier_address_1', NULL, '$template_supplier_address_3', '$template_supplier_postcode',
     '$user_full_name', '$user_address_1', '$user_address_2', '$user_address_3', '$user_postcode'
     )";
@@ -115,33 +129,24 @@ function generate_invoice()
                 </thead>
                 <tbody>
                     <?php
-                    $subtotal = 0.00;
-                    $delivery_fee = 2.99;
-                    $total_cost = 0.00;
+                    mysqli_data_seek(result: $result_items_full_info_and_quantity, offset: 0);
                     while ($row = mysqli_fetch_assoc($result_items_full_info_and_quantity)) {
                         $product_details = $row['manufacturer'] . ": " . $row['name'];
-                        $quantity = (int) $row['quantity'];
-                        $price = (float) $row['unit_price'];
-                        $total_individual = $quantity * $price;
-                        $subtotal += $total_individual;
-                        $total_cost += (float)$subtotal;
                         $image = $row['image'];
-                        $invoice_description += $quantity . $product_details . '@' . $subtotal;
                         ?>
                         <tr>
                             <td><?php echo '<img src="data:image/png;base64,' . base64_encode($image) . '" width=25%/>'; ?>
                             </td>
                             <td><?php echo $product_details; ?></td>
-                            <td><?php echo $quantity; ?></td>
-                            <td><?php echo $price; ?></td>
-                            <td><?php echo $total_individual; ?></td>
+                            <td><?php echo $row['quantity']; ?></td>
+                            <td><?php echo $row['unit_price']; ?></td>
+                            <td><?php echo  $row['quantity'] * $row['unit_price']; ?></td>
                             <td><button>X</button></td>
                         </tr>
                         <?php
                     }
                     ?>
                     <tr>
-                        <?php $total_cost += $delivery_fee; ?>
                         <td></td><!-- Blank TD to ensure position of below elements -->
                         <td></td><!-- Blank TD to ensure position of below elements -->
                         <td></td><!-- Blank TD to ensure position of below elements -->

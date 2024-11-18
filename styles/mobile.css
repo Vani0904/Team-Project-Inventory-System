@@ -408,8 +408,7 @@ h1#generated-invoice-h1
     width: 620px;
     height: 877px;
     padding: 0px 50px;
-    box-shadow: 0px 0px 10px black;
-    border-radius: 40px;
+    border-radius: 10px;
 }
 
 #generated-invoice-header, #generated-invoice-addresses
@@ -424,8 +423,8 @@ h1#generated-invoice-h1
 {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
-    padding: 100px;
+    justify-content: space-between;
+    padding: 0px 25px;
 }
 
 /*#endregion*/

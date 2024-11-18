@@ -1,9 +1,6 @@
 <?php
 include "../includes/connectdb.php";
 
-//header("Content-type: application/vnd.ms-word");
-//header("Content-Disposition: attachment; filename=Invoice-Result.doc");
-
 $parse = $_GET['data'];
 
 $exploded = explode(',', $parse);
@@ -11,7 +8,7 @@ $exploded = explode(',', $parse);
 $invoice_id = $exploded[0];
 $users_id = $exploded[1];
 
-$sql_invoice = "SELECT invoice_date, total_cost, 
+$sql_invoice = "SELECT invoice_date, total_cost, invoice_description,
 supplier_name, supplier_address_1, supplier_address_2, supplier_address_3, supplier_postcode,
 customer_name, customer_address_1, customer_address_2, customer_address_3, customer_postcode
 FROM invoices WHERE invoice_id = '$invoice_id'";
@@ -20,13 +17,14 @@ $sql_user = "SELECT first_name, surname FROM users WHERE user_id = '$users_id'";
 
 $sql_invoice_result = mysqli_query($connection, $sql_invoice);
 $sql_user_result = mysqli_query($connection, $sql_user);
+
 ?>
 
 <html>
 
 <head>
     <link rel="stylesheet" href="mobile.css" />
-    <link rel="stylesheet" media="only screen and (min-device-width: 737px)" href="../styles/mobile.css" />
+    <link rel="stylesheet" media="all and (min-device-width: 737px)" href="../styles/mobile.css" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Invoice</title>
@@ -39,6 +37,7 @@ $sql_user_result = mysqli_query($connection, $sql_user);
             <?php
             while ($row = mysqli_fetch_assoc($sql_invoice_result)) {
                 $invoice_date = $row['invoice_date'];
+                $invoice_description = $row['invoice_description'];
                 ?>
                 <?php
             }
@@ -51,7 +50,7 @@ $sql_user_result = mysqli_query($connection, $sql_user);
             <div>
                 <h3>Supplier Address</h3>
                 <?php
-                mysqli_data_seek($sql_invoice_result, 0);
+                mysqli_data_seek(result: $sql_invoice_result, offset: 0);
                 while ($row = mysqli_fetch_assoc($sql_invoice_result)) {
                     $total_cost = $row['total_cost'];
                     $supplier_name = $row['supplier_name'];
@@ -85,7 +84,18 @@ $sql_user_result = mysqli_query($connection, $sql_user);
                 <p><?php echo $customer_postcode; ?></p>
             </div>
         </div>
+        <h3>Summary</h3>
         <div id="generated-invoice-main-body">
+            <?php
+            $invoice_description_exploded = explode("\n", $invoice_description);
+            ?>
+            <div>
+                <?php
+                for ($i = 0; $i <= count($invoice_description_exploded) - 1; $i++) 
+                {
+                    echo "<p>" . $invoice_description_exploded[$i] . "</p>";
+                } ?>
+            </div>
             <p><b>Total Cost: </b> £<?php echo $total_cost; ?></p>
         </div>
     </div>
