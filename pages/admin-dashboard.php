@@ -7,13 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="../styles/desktop.css">
+    <!------popping font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
 </head>
 <body>
     <div class="admin-db-container">
         <input type="checkbox" id="menu-toggle" class="menu-toggle">
         <?php include '../includes/nav-menu.php'; ?>
         <div class="dashboard-content">
-            <?php include '../includes/header-admin.php'; ?>
+            <?php include '../includes/header-admin.php'; ?>  <!-- Inventory KPI section -->
             <h1>Inventory Management KPIs</h1>
             <div class="Kpi">
                 <div>
@@ -35,7 +42,7 @@
                     <p>400 Units</p>
                 </div>
             </div>
-            <div class="nav-btns">
+            <div class="nav-btns">   <!-- Inventory Table section -->
                 <a href="">Generate Report</a>
                 <a href="admin-analytics.php">View Analytics</a>
                 <a href="">Add Product</a>
@@ -61,14 +68,23 @@
                             <th>Name</th>
                             <th>Branch</th>
                             <th>Price</th>
-                            <th>Quantity</th>
                             <th>Category</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                            $query = "SELECT * FROM product";
+                            $query = "SELECT
+                                        product.product_id,
+                                        product.name AS product_name,
+                                        branches.name AS branch_name,
+                                        product.unit_price,
+                                        product.category
+                                      FROM product
+                                      INNER JOIN
+                                           branches
+                                      ON
+                                        product.branch_id = branches.branch_id";
                             $result = mysqli_query($connection,$query);
 
                             if (mysqli_num_rows($result) > 0)
@@ -78,10 +94,9 @@
                                     ?>
                                     <tr>
                                         <td data-label="ID"><?php echo $productColumn['product_id']; ?></td>
-                                        <td data-label="Name"><?php echo $productColumn['name']; ?></td>
-                                        <td data-label="Branch"><?php echo $productColumn['branch_id']; ?></td>
+                                        <td data-label="Name"><?php echo $productColumn['product_name']; ?></td>
+                                        <td data-label="Branch"><?php echo $productColumn['branch_name']; ?></td>
                                         <td data-label="Price">£<?php echo $productColumn['unit_price']; ?></td>
-                                        <td data-label="Quantity"><?php echo $productColumn['quantity']; ?></td>
                                         <td data-label="Category"><?php echo $productColumn['category']; ?></td>
                                         <td data-label="Actions">
                                         <a href="" class="edit-item-btn">Edit</a>
