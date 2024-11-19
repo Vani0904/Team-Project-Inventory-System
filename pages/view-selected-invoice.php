@@ -96,6 +96,7 @@ $sql_user_result = mysqli_query($connection, $sql_user);
                     echo "<p>" . $invoice_description_exploded[$i] . "</p>";
                 } ?>
             </div>
+            <p>Shipping: £2.99</p>
             <p><b>Total Cost: </b> £<?php echo $total_cost; ?></p>
         </div>
     </div>

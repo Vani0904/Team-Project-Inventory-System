@@ -39,7 +39,7 @@ while ($row = mysqli_fetch_assoc($result_items_full_info_and_quantity))
 {
     $total_individual = $row['quantity'] * $row['unit_price'];
     $subtotal += $total_individual;
-    $invoice_description .= $row['quantity'] . '*' . $row['manufacturer'] . "(" . $row['name'] . ")"  . '@' . $subtotal . "\n";
+    $invoice_description .= $row['quantity'] . '*' . $row['manufacturer'] . "(" . $row['name'] . ")"  . '@' . $row['unit_price'] . "\n";
 }
 
 $total_cost = $subtotal + $delivery_fee; //Include the delivery fee.
