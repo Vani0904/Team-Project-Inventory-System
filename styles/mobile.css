@@ -248,6 +248,16 @@ tbody tr td {
     border: none;
 }
 
+.open-invoice
+{
+    padding: 1vh 1vw;
+    border-radius: 5px;
+    font-size: 0.75em;
+    color: white;
+    background-color: var(--main-color);
+    border: none;
+}
+
 #invoice-table-container
 {
     overflow-x: auto;
@@ -402,13 +412,17 @@ h1#generated-invoice-h1
 
 #generated-invoice-container
 {
-    margin-top: 75px;
+    margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
     width: 620px;
-    height: 877px;
-    padding: 0px 50px;
+    height: fit-content;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 25px;
+    padding-bottom: 150px;
     border-radius: 10px;
+    border: 8px double black;
 }
 
 #generated-invoice-header, #generated-invoice-addresses
