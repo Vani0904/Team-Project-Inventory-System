@@ -1,9 +1,28 @@
-<?php //include '../includes/check-if-user.php'; ?> <!--This will be required once we have database integration.-->
-<?php include '../includes/head.php'; ?>
+<?php //include '../includes/check-if-user.php';  <!--This will be required once we have database integration.-->
+include '../includes/head.php';
+?>
 
 <head>
     <title>Shop</title>
 </head>
+
+<script>
+function searchAllProducts () 
+{
+  var data = new FormData(document.getElementById("mySearch"));
+
+  fetch("controller.php", { method:"POST", "body":data })
+  .then(res => res.json())
+  .then(res => {
+    let results = document.getElementById("results");
+    results.innerHTML = "";
+    if (res !== null) { for (let r of res) {
+      results.innerHTML += `<div>${r.id} - ${r.name}</div>`;
+    }}
+  });
+  return false;
+}
+</script>
 
 <body>
     <div class="container">
@@ -54,64 +73,12 @@
             </div>
             <div id="products-grid-container">
                 <div class="section">
-                    <img src="" width="250px" height="250px">
-                    <label>Product A</label>
+                <div>
+                <p id="mySearch">Stephen</p>   
                 </div>
-                <div class="section">
-                    <img src="" width="250px" height="250px">
-                    <label>Product B</label>
-                </div>
-                <div class="section">
-                    <img src="" width="250px" height="250px">
-                    <label>Product C</label>
-                </div>
-                <div class="section">
-                    <img src="" width="250px" height="250px">
-                    <label>Product D</label>
-                </div>
-                <div class="section">
-                    <img src="" width="250px" height="250px">
-                    <label>Product E</label>
-                </div>
-                <div class="section">
-                    <img src="" width="250px" height="250px">
-                    <label>Product F</label>
-                </div>
-                <div class="section">
-                    <img src="" width="250px" height="250px">
-                    <label>Product G</label>
-                </div>
-                <div class="section">
-                    <img src="" width="250px" height="250px">
-                    <label>Product H</label>
-                </div>
-                <div class="section">
-                    <img src="" width="250px" height="250px">
-                    <label>Product I</label>
-                </div>
-                <div class="section">
-                    <img src="" width="250px" height="250px">
-                    <label>Product J</label>
-                </div>
-                <div class="section">
-                    <img src="" width="250px" height="250px">
-                    <label>Product K</label>
-                </div>
-                <div class="section">
-                    <img src="" width="250px" height="250px">
-                    <label>Product L</label>
-                </div>
-                <div class="section">
-                    <img src="" width="250px" height="250px">
-                    <label>Product M</label>
-                </div>
-                <div class="section">
-                    <img src="" width="250px" height="250px">
-                    <label>Product N</label>
-                </div>
-                <div class="section">
-                    <img src="" width="250px" height="250px">
-                    <label>Product O</label>
+                    <div id="results">
+
+                    </div>
                 </div>
             </div>
         </div>

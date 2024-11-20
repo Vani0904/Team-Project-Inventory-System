@@ -150,7 +150,7 @@ strong {
 #products-grid-container {
     margin-top: 20px;
     display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-columns: 25% 25% 25% 25%;
     gap: 20px 0px;
 }
 
@@ -158,6 +158,7 @@ strong {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 20px;
 }
 
 /*#endregion*/
