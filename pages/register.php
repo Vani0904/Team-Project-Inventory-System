@@ -53,7 +53,7 @@
     ?>
 
         <form class ="user-form" action="register.php" method="post">
-           <h3>Sign up</h3>
+           <h3>Sign Up</h3>
      
            <input class="control" type="text" name="firstname" required placeholder="First Name" maxlength='30'>
            <input class="control" type="text" name="middlename" placeholder="Middle Name" maxlength='30'>
