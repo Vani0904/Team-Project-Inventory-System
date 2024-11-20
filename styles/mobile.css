@@ -351,7 +351,7 @@ h1.admin {
     padding: 50px 15px;
     border-radius: 3px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
-    background: #fff;
+    background: #bb90db;
     text-align: center;
     width: 470px;
 
@@ -375,8 +375,8 @@ h1.admin {
 
 .main-container .user-form .form-btn {
     width: 70%;
-    background: var(--main-color);
-    color: white;
+    background: white;
+    color: black;
     text-transform: capitalize;
     font-size: 20px;
     cursor: pointer;
