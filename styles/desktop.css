@@ -106,12 +106,14 @@ h1{
 .inventory-table th{
     border: 1px solid #cecece;
     padding: 10px 5px;
+    align-items: center;
 }
 .inventory-table td{
     background-color: #e7e6e6;
     border: 1px solid #cecece;
     padding: 10px 5px;
     text-align: center;
+    font-weight: bold;
 }
 .inventory-table td button{
     padding: 5px 10px;
@@ -121,6 +123,28 @@ h1{
 .inventory-table td button:hover{
     cursor: pointer;
 }
+.inventory-table thead a{
+    color: #000;
+}
+#search-inventory-product{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+#search-inventory-product input{
+    margin: 0 10px;
+}
+#search-inventory-product button {
+    position: absolute;
+    top: 8%;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+#search-inventory-product button img{
+    width: 20px;
+}
 .nav-btns{
     display: flex;
     justify-content: end;
@@ -128,11 +152,15 @@ h1{
 .nav-btns a{
     color: black;
     text-decoration: none;
-    border: 1px solid #aaaaaa;
+    border: 2px solid #8a8a8a;
     margin: 20px;
     padding: 10px;
+    font-weight: bold;
     text-align: center;
     border-radius: 25px
+}
+.nav-btns a:hover{
+    background-color: var(--purple);
 }
 .filter-inputs{
     display: flex;
@@ -142,10 +170,36 @@ h1{
 .filter-inputs select{
     padding: 5px 20px;
     font-size: 0.95rem;
+    font-weight: bold;
+    border: 2px solid #8a8a8a;
+    border-radius: 13px;
+}
+.filter-inputs select:focus{
+    outline: none;
 }
 .filter-inputs input[type="text"]{
     padding: 6px 10px;
     outline: none;
+    border: 2px solid #8a8a8a;
+    border-radius: 13px;
+    font-weight: bold;
+}
+.filter-inputs form button{
+    padding: 5px 10px;
+    border: 2px solid #8a8a8a;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+}
+.filter-inputs form a{
+    padding: 5px 10px;
+    border: 2px solid #8a8a8a;
+    font-weight: bold;
+    color: #000;
+}
+.filter-inputs form a:hover,
+.filter-inputs form button:hover{
+    background-color: var(--purple);
 }
 .edit-item-btn {
     background-color: #21b42d;
@@ -162,6 +216,89 @@ h1{
     color: #fff;
     text-decoration: none;
 }
+.alert{
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+.alert.success{
+    color: #155724;
+    background-color: #d4edda ;
+    border: 1px solid #c3e6cb;
+}
+.alert.error{
+    color: #682219;
+    background-color: #d67c7c ;
+    border: 1px solid #d86e6e;
+}
+.alert.info{
+    color: #0e0e0e;
+    background-color: #c4c4c4 ;
+    border: 1px solid #c4c4c4;
+}
+.admin-db-form .admin-db-container{
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.product-form{
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    max-width: 800px;
+    border-radius: 14px;
+    width: auto;
+    background-color: #e2e1e1;
+}
+.product-form img{
+    width: 250px;
+    margin: 0 auto;
+}
+.product-form .title{
+    font-size: 2.3rem;
+    text-align: center;
+}
+.product-form input,
+.product-form select{
+    padding: 10px 20px;
+    margin: 10px ;
+    border-radius: 20px ;
+    font-size: 1.2rem;
+    border: 2px solid #6b6b6b;
+    background-color: #fff;
+}
+.product-form label {
+    font-weight: bold;
+    font-size: 1rem;
+}
+.product-form input:focus{
+    outline: none;
+    border-color: var(--dark);
+}
+.product-form input[type="submit"]{
+    padding: 10px 30px;
+    margin: 0 auto;
+}
+.product-form input[type="submit"]:hover{
+    background-color: var(--purple);
+    cursor: pointer;
+}
+.product-form a{
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #000;
+    padding: 5px 10px;
+    margin: 10px 0;
+    width: fit-content;
+    border: 2px solid #6b6b6b;
+    background-color: #fff;
+    border-radius: 20px ;
+}
+.product-form a:hover{
+    background-color: var(--purple);
+}
 /*Mobile css */
 @media only screen and (max-width: 1000px) {
     .Kpi{
@@ -171,14 +308,17 @@ h1{
         flex: 1 1 40%;
         margin: 10px;
     }
-}
-@media only screen and (max-width: 710px) {
     .filter-inputs{
         flex-direction: column;
         align-items: center;
     }
     #search-inventory-product{
         margin: 10px 0;
+    }
+}
+@media only screen and (max-width: 920px) {
+    .inventory-table td {
+        padding: 20px 5px;
     }
 }
 @media only screen and (max-width: 654px) {
@@ -264,6 +404,12 @@ h1{
         left: 0px;
     }
 }
+@media only screen and (max-width: 560px){
+    .admin-db-form .admin-db-container{
+        align-items: normal;
+    }
+}
+
 @media only screen and (max-width: 406px){
     .filter-inputs input[type="text"]{
         padding: 4px 8px ;        
