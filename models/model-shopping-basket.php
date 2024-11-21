@@ -3,7 +3,7 @@ require_once  '../includes/database.php';
 
 class ShoppingBasket 
 {
-    public static function getCartId ($user_id)
+    public static function getCartId($user_id)
     {
         $db = Database::connect();
         $query = "SELECT cart_id FROM users WHERE user_id = $user_id";
