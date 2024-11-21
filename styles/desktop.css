@@ -301,6 +301,7 @@ h1{
 
 /*#endregion*/
 
+/*#region Guest Page*/
 /*-----------------------------------------------------guest page------------------------------------------------------------------------------------*/
 html {
     scroll-behavior: smooth;
@@ -526,9 +527,9 @@ header .g-icon a{
 }
 
 /*-----------------------------------------------------guest page end ------------------------------------------------------------------------------------*/
+/*#endregion*/
 
-
-/* footer */
+/*#region Footer*/
 
 footer{
     position: absolute;
@@ -541,6 +542,12 @@ footer{
     font-family:"open sans";
     padding-top: 40px;
     color: #111;
+}
+
+/* This is a way to have the footer appear at the true bottom of the page, rather than the bottom of the initial viewport height*/
+.footer .jackscustomtest 
+{
+    position: fixed;
 }
 
 .footer-content{
@@ -609,7 +616,7 @@ footer{
     opacity: .4;
     font-weight: 200;
 }
-
+/*#endregion*/
 
 /* media queries */
 @media (max-width:991px){
