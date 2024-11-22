@@ -1,11 +1,12 @@
-// footer.js
 function loadFooter() {
-    const footer = document.createElement('footer');
-    footer.innerHTML = `
-      <p>&copy; 2024</p>
-    `;
-    document.body.appendChild(footer);
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => {
+        const footer = document.createElement('footer');
+        footer.innerHTML = data;
+        document.body.appendChild(footer);
+      });
   }
   
-  // Call the function to load the footer
+
   window.onload = loadFooter;
