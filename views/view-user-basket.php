@@ -16,7 +16,7 @@ if(isset($_POST['checkout-button']))
         <div id="basket">
             <?php include '../includes/header-admin.php'; ?>
             <div id="return">
-                <button id="return-button" onclick="window.location.href='user-home.php'"><img
+                <button id="return-button" onclick="window.location.href='user-homepage.php'"><img
                         src="../images/icon-return.png" alt="return to previous page button icon" width="30px"
                         height="30px"></button>
                 <p>Return</p>

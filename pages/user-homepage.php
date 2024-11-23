@@ -1,5 +1,5 @@
 <?php
-require_once '../controllers/controller-product.php';
+require_once '../controllers/controller-user-homepage.php';
 
-ProductController::showProducts();
+ProductController::process();
 ?>

@@ -1,6 +1,7 @@
 <?php
 //include '../includes/check-if-user.php';  <!--This will be required once we have database integration.-->
 include '../includes/head.php';
+$counter = 0;
 ?>
 
 <head>
@@ -18,17 +19,22 @@ include '../includes/head.php';
             </div>
             <div id="brand">
                 <strong>By Brand</strong>
-                <button>Brand 1</button>
-                <button>Brand 2</button>
-                <button>Brand 3</button>
-                <button>Brand 4</button>
+                <?php foreach ($manufacturers as $manufacturer)
+                {
+                    ?>
+                <button><?= $manufacturer['manufacturer'] ?></button>
+                <?php
+                }
+                ?>
             </div>
             <div id="price">
                 <strong>By Price</strong>
-                <button>Price Bracket 1</button>
-                <button>Price Bracket 2</button>
-                <button>Price Bracket 3</button>
-                <button>Price Bracket 4</button>
+                <button>£0.00 - £20.00</button>
+                <button>£20.00 - £40.00</button>
+                <button>£40.00 - £80.00</button>
+                <button>£80+</button>
+                <p><br>Under: (£)</p>
+                <button><input type="range" min="1" max="300" value="100" id="slider-price" oninput="this.nextElementSibling.value = this.value"><output>100</output></button>
             </div>
             <div>
                 <button>Clear Filters</button>
@@ -47,19 +53,28 @@ include '../includes/head.php';
                 </div>
             </div>
             <div id="products-grid-container">
-                <?php foreach ($products as $product): ?>
-                    <div class="section">
-                        <img src="data:image/png;base64,<?= base64_encode($product['product_image']) ?>">
-                        <p><b><?= $product['manufacturer'] ?></b></p>
-                        <p><?= $product['name'] ?></p>
-                        <p>£<?= number_format($product['unit_price'], 2) ?></p>
-                    </div>
-                <?php endforeach; ?>
+                <?php
+                foreach ($products as $product) 
+                {
+                    if ($counter < 12) 
+                    {
+                        $counter++;
+                        ?>
+                        <div class="section">
+                            <img src="data:image/png;base64,<?= base64_encode($product['product_image']) ?>">
+                            <p><b><?= $product['manufacturer'] ?></b></p>
+                            <p><?= $product['name'] ?></p>
+                            <p>£<?= number_format($product['unit_price'], 2) ?></p>
+                        </div>
+                        <?php
+                    }
+                }
+                ?>
             </div>
         </div>
     </div>
 </body>
 
-<?php include '../pages/footer.html'; ?>
+<?php //include '../pages/footer.html'; ?>
 
 </html>

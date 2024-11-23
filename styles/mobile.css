@@ -324,12 +324,14 @@ tbody tr td {
 {
     font-size: 1em;
     text-align: center;
+    width: 100%;
+    padding: 1em;
 }
 
 #analytics-graphs-container {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    justify-items: center;
+    display: flex;
+    flex-direction: column;
+    max-width: 75vw;
 }
 
 /*#endregion*/
