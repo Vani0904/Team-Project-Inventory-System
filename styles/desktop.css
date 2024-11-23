@@ -683,7 +683,7 @@ header .g-icon a{
 /*#region Footer*/
 
 footer{
-    position: absolute;
+    position: 0;
     bottom: 0;
     left: 0;
     right: 0;
@@ -695,7 +695,7 @@ footer{
     color: #111;
 }
 
-/* This is a way to have the footer appear at the true bottom of the page, rather than the bottom of the initial viewport height*/
+
 .footer .jackscustomtest 
 {
     position: fixed;
@@ -767,7 +767,7 @@ footer{
     opacity: .4;
     font-weight: 200;
 }
-/*#endregion*/
+/*------------------------------------footer end---------------------------------*/
 
 /* media queries */
 @media (max-width:991px){
