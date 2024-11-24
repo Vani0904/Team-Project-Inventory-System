@@ -12,11 +12,11 @@
     <div class="main-container">
         <form class ="user-form" action="register.php" method="post">
         <h3>Sign Up</h3>
-           <input class="control" type="text" name="firstname" required placeholder="First Name" maxlength='30'>
-           <input class="control" type="text" name="middlename" placeholder="Middle Name" maxlength='30'>
+           <input class="control" type="text" name="first_name" required placeholder="First Name" maxlength='30'>
+           <input class="control" type="text" name="middle_name" placeholder="Middle Name(Optional)" maxlength='30'>
            <input class="control" type="text" name="surname" required placeholder="Surname" maxlength='30'>
            <input class="control" type="username" name="username" required placeholder="Username">
-           <input class="control" type="password" name="userpassword" required placeholder="Password" maxlength='12'>
+           <input class="control" type="password" name="password" required placeholder="Password" maxlength='12'>
            <input class="control" type="password" name="cpassword" required placeholder="Confirm password" maxlength='12'>
            <input class="control" type="text" name="address_1" required placeholder="Address 1" maxlength='30'>
            <input class="control" type="text" name="address_2" required placeholder="Address 2" maxlength='30'>
