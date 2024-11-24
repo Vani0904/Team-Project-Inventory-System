@@ -18,6 +18,10 @@
            <input class="control" type="username" name="username" required placeholder="Username">
            <input class="control" type="password" name="userpassword" required placeholder="Password" maxlength='12'>
            <input class="control" type="password" name="cpassword" required placeholder="Confirm password" maxlength='12'>
+           <input class="control" type="text" name="address_1" required placeholder="Address 1" maxlength='30'>
+           <input class="control" type="text" name="address_2" required placeholder="Address 2" maxlength='30'>
+           <input class="control" type="text" name="address_3" required placeholder="Address 3" maxlength='30'>
+           <input class="control" type="text" name="postcode" required placeholder="Postcode" maxlength='30'>
   <h4 class="t&cs">By signing up you agree to the <a href="">terms & conditions</a>.</h4>
            <input type="submit" name="submit" value="Sign Up" class="form-btn">
            <p>or <a href="login.php">Login</a></p>
