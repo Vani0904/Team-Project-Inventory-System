@@ -286,26 +286,26 @@ INSERT INTO `shopping_carts` (`cart_id`, `user_id`) VALUES
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `user_id` int NOT NULL,
-  `cart_id` int NOT NULL,
-  `first_name` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `middle_name` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `surname` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `username` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(60) COLLATE utf8mb4_general_ci NOT NULL,
-  `user_type` tinyint NOT NULL,
-  `address_1` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `address_2` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `address_3` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `postcode` char(6) COLLATE utf8mb4_general_ci NOT NULL
+CREATE TABLE 'users' (
+  'user_id' int NOT NULL,
+  'cart_id' int NOT NULL,
+  'first_name' varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  'middle_name' varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  'surname' varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  'username' varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  'password' varchar(60) COLLATE utf8mb4_general_ci NOT NULL,
+  'user_type' tinyint NOT NULL,
+  'address_1' varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  'address_2' varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  'address_3' varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  'postcode' char(6) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `cart_id`, `first_name`, `middle_name`, `surname`, `username`, `password`, `user_type`, `address_1`, `address_2`, `address_3`, `postcode`) VALUES
+INSERT INTO 'users' ('user_id', 'cart_id', 'first_name', 'middle_name', 'surname', 'username', 'password', 'user_type', 'address_1', 'address_2', 'address_3', 'postcode') VALUES
 (1, 1, 'Stephen', 'Alan', 'Wake', 'swake', '1000', 0, '52 Longest Street', 'Dustington', 'Sheffield', 'S13 ZB');
 
 --
