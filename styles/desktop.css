@@ -92,6 +92,10 @@ h1{
     font-size: 2rem;
     font-weight: bold;
 }
+.Kpi span{
+    font-size: 1.1rem;
+    font-weight: 600;
+}
 .table-container{
     overflow-y: auto;
     max-height: 550px;

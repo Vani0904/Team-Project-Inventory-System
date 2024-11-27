@@ -454,6 +454,57 @@ h1#generated-invoice-h1
 
 /*#endregion*/
 
+/*#region Generated Report Page*/
+h1#generated-report-h1
+{
+    font-size: 3.5em;
+}
+
+#generated-report-container{
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 620px;
+    height: fit-content;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 25px;
+    padding-bottom: 150px;
+    border-radius: 10px;
+    border: 8px double black;
+}
+#generated-report-container table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 100%;
+}
+#generated-report-container th{
+    border: 1px solid #cecece;
+    padding: 10px 5px;
+    align-items: center;
+}
+#generated-report-container td{
+    border: 1px solid #cecece;
+    padding: 10px 5px;
+    text-align: center;
+}
+#generated-report-header
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#generated-report-main-body
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 25px;
+}
+/*#endregion*/
+
 /*#region Integrating "@media only" which is in Desktop.css*/
 
 @media only screen and (max-width: 1000px) {
