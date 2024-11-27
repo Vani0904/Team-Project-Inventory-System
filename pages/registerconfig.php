@@ -1,18 +1,23 @@
 <?php
         include "../includes/connectdb.php";
-    
+
         function validate_register($username, $password, $confirm_password, $mysqli) {
             if ($password != $confirm_password) {
                 echo "Passwords do not match.";
                 return false;
             }
-    
-            $register_query = "SELECT username FROM users WHERE username = '{$username}';";
-            $register_result = $mysqli->query($register_query);
-            if ($obj = $register_result->fetch_object()) {
-                if ($obj->username === $username) { return false; }
+        
+            $register_query = "SELECT username FROM users WHERE username = ?";
+            $stmt = $mysqli->prepare($register_query);
+            $stmt->bind_param("s", $username);
+            $stmt->execute();
+            $stmt->store_result();
+        
+            if ($stmt->num_rows > 0) {
+                echo "Username already exists.";
+                return false;
             }
-    
+        
             return true;
         }
     
@@ -32,15 +37,16 @@
                 $hashed_password = password_hash($get_password, PASSWORD_BCRYPT);
 
                 $stmt = $mysqli->prepare("
-                    INSERT INTO users 
-                    (first_name, middle_name, surname, username, password, is_registered, is_admin, address_1, address_2, address_3, postcode) 
-                    VALUES (?, ?, ?, ?, ?, 1, 0, ?, ?, ?, ?)");
-                $stmt->bind_param(
-                    "ssssssss", 
-                    $first_name, $middle_name, $surname, $username, 
-                    $hashed_password, $address_1, $address_2, $address_3, $postcode
-                );
-        
+               INSERT INTO users 
+              (first_name, middle_name, surname, username, password, is_registered, is_admin, address_1, address_2, address_3, postcode) 
+               VALUES (?, ?, ?, ?, ?, 1, 0, ?, ?, ?, ?)");
+
+            $stmt->bind_param(
+               "sssssssss", 
+                $first_name, $middle_name, $surname, $get_username, 
+                $hashed_password, $address_1, $address_2, $address_3, $postcode
+             );
+
                 if ($stmt->execute()) {
                     header("Location: login.php");
                     exit();
