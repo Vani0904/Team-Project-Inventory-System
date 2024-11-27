@@ -41,7 +41,7 @@
       <!-------btn -->
       <div class="g-icon">
         <!---------login-->
-        <a href="#" class="nav-user">
+        <a href="register.php" class="nav-user">
           <i class="fa-regular fa-user" style="color: #b197fc"></i>
         </a>
       </div>
