@@ -1,6 +1,9 @@
 <?php
         include "../includes/connectdb.php";
 
+        ini_set('display_errors', 1);
+        error_reporting(E_ALL);
+
         function validate_register($username, $password, $confirm_password, $mysqli) {
             if ($password != $confirm_password) {
                 echo "Passwords do not match.";
