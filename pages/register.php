@@ -26,13 +26,13 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
         $first_name = $_POST['first_name'];
-        $middle_name = $_POST['middle_name'] ?? null; //optional
+        $middle_name = $_POST['middle_name'] ?? null; // Optional field, will be null if not provided
         $surname = $_POST['surname'];
         $get_username = $_POST['username'];
         $get_password = $_POST['password'];
         $get_confirm_password = $_POST['cpassword'];
         $address_1 = $_POST['address_1'];
-        $address_2 = $_POST['address_2'] ?? null; //optional
+        $address_2 = $_POST['address_2'] ?? null; // Optional field, will be null if not provided
         $address_3 = $_POST['address_3'];
         $postcode = $_POST['postcode'];
 
@@ -49,8 +49,9 @@
             ");
 
             // Bind parameters for the query
+            // Now, we are binding 9 parameters, and type definition string has 9 placeholders
             $stmt->bind_param(
-                "ssssssssss", 
+                "sssssssss", // 9 placeholders for each string (including middle_name and address_2)
                 $first_name, $middle_name, $surname, $get_username, 
                 $hashed_password, $address_1, $address_2, $address_3, $postcode
             );
@@ -73,7 +74,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="mobile.css" />
-    <link rel="stylesheet" media="only screen and (min-device-width: 737px)" href="../styles/mobile.css"  />
+    <link rel="stylesheet" media="only screen and (min-device-width: 737px)" href="../styles/mobile.css" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
