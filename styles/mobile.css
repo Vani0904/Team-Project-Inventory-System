@@ -41,30 +41,33 @@ body
     color: white;
 }
 
-#navigation-sidebar #breaker {
-    padding: 3vh 0px;
-    background-color: transparent;
-}
-
-#navigation-sidebar #brand,
-#price,
-strong {
+#product-filtering
+{
     display: flex;
     flex-direction: column;
-    padding-left: 15px;
-    padding-right: 15px;
-    color: white;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    text-align: left;
 }
 
-#navigation-sidebar #brand button,
-#price button {
+#product-filtering label
+{
+    color: white;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#product-filtering button
+{
     text-align: left;
     background-color: transparent;
     border: 1px solid white;
     color: white;
-    padding: 15px;
+    padding: 7.5px 5px;
+}
+
+#product-filtering output
+{
+    text-align: end;
+    padding: 10px 0px;
 }
 
 #header-user {

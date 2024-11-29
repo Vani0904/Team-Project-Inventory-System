@@ -2,6 +2,9 @@
 //include '../includes/check-if-user.php';  <!--This will be required once we have database integration.-->
 include '../includes/head.php';
 $counter = 0;
+
+//echo count($products);
+
 ?>
 
 <head>
@@ -11,34 +14,22 @@ $counter = 0;
 <body>
     <div class="container">
         <div id="navigation-sidebar">
-            <div id="breaker">
-
-            </div>
-            <div>
-                <strong>Filter Results:</strong>
-            </div>
-            <div id="brand">
-                <strong>By Brand</strong>
+            <form method="GET" action="user-homepage.php" id="product-filtering">
+                <label>Brand:</label>
                 <?php foreach ($manufacturers as $manufacturer)
                 {
                     ?>
-                <button><?= $manufacturer['manufacturer'] ?></button>
-                <?php
+                    <button type="submit" name="brand" value="<?= $manufacturer['manufacturer'] ?>"><?= $manufacturer['manufacturer'] ?></button>
+                    <?php
                 }
                 ?>
-            </div>
-            <div id="price">
-                <strong>By Price</strong>
-                <button>£0.00 - £20.00</button>
-                <button>£20.00 - £40.00</button>
-                <button>£40.00 - £80.00</button>
-                <button>£80+</button>
-                <p><br>Under: (£)</p>
-                <button><input type="range" min="1" max="300" value="100" id="slider-price" oninput="this.nextElementSibling.value = this.value"><output>100</output></button>
-            </div>
-            <div>
-                <button>Clear Filters</button>
-            </div>
+
+                <label>Price Range (£):</label>
+                <input type="range" min="1" max="300" id="slider-price-min" name="price-min" oninput="this.nextElementSibling.value = this.value" value="<?= $_GET['price-min'] ?? '0' ?>"><output><?= $_GET['price-min'] ?? '0' ?></output>
+                <input type="range" min="1" max="300" id="slider-price-max" name="price-max" oninput="this.nextElementSibling.value = this.value" value="<?= $_GET['price-max'] ?? '300' ?>"><output><?= $_GET['price-max'] ?? '300' ?></output>
+
+                <button type="submit">Apply Price Filter</button>
+            </form>
         </div>
         <div class="segment-margined">
             <?php include '../includes/header-user.php'; ?>
@@ -56,8 +47,7 @@ $counter = 0;
                 <?php
                 foreach ($products as $product) 
                 {
-                    if ($counter < 12) 
-                    {
+                    if ($counter < 12) {
                         $counter++;
                         ?>
                         <div class="section">
@@ -75,6 +65,6 @@ $counter = 0;
     </div>
 </body>
 
-<?php //include '../pages/footer.html'; ?>
+<?php include '../pages/footer.html'; ?>
 
 </html>
