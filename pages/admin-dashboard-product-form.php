@@ -38,8 +38,8 @@
                 //Process the upload of a new image
                 $imageData = addslashes(file_get_contents($_FILES['image']['tmp_name']));
             } else {
-                if (isset($product['image'])) { //use existing or default image
-                    $imageData = $product['image'];
+                if (isset($product['product_image'])) { //use existing or default image
+                    $imageData = $product['product_image'];
                 } else {
                 //Otherwise, use existing image or default image
                 $imageData = "../images/image-product-template.png";
@@ -73,7 +73,7 @@
                         }
     
                         if (isset($_FILES['image']) && $_FILES['image']['size'] > 0) {
-                            $updateFields[] = "image = '$imageData'";
+                            $updateFields[] = "product_image = '$imageData'";
                         }
     
                         if (!empty($updateFields)){
@@ -104,7 +104,7 @@
                             $message_type ="info";
                         }
                     } else{ 
-                        $insertQuery = "INSERT INTO products (name,unit_price,category,manufacturer,image) 
+                        $insertQuery = "INSERT INTO products (name,unit_price,category,manufacturer,product_image) 
                                         VALUES ('$name',$unit_price,'$category','$manufacturer','$imageData')";
                         if (mysqli_query($connection,$insertQuery)) {
                             $product_id = mysqli_insert_id($connection);

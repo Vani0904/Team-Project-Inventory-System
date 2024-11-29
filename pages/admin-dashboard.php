@@ -2,12 +2,16 @@
 <?php include "../includes/connectdb.php";
         $sortColumn = isset($_GET['sort']) ? $_GET['sort'] : 'product_id';
         $sortOrder = isset($_GET['order']) && $_GET['order'] === 'desc' ? 'DESC' : 'ASC';
+
+        $branchOptionsQuery = "SELECT branch_id, name FROM branches";
+        $branchOptionsResult = mysqli_query($connection, $branchOptionsQuery);
         
+        $branchFilter = isset($_GET['branch']) ? mysqli_escape_string($connection, $_GET['branch']) : '';
         $categoryFilter = isset($_GET['category']) ? mysqli_escape_string($connection, $_GET['category']) : '';
         $searchProductFilter = isset($_GET['search-product']) ? mysqli_escape_string($connection, $_GET['search-product']) : '';
         
         //Sets allowed columns for filtering
-        $allowedSortColumns = ['product.name', 'unit_price', 'category', 'quantity'];
+        $allowedSortColumns = ['p.name', 'unit_price', 'category', 'quantity'];
         if (!in_array($sortColumn, $allowedSortColumns)) {
             $sortColumn = 'product_id';
         }
@@ -23,8 +27,13 @@
                     INNER JOIN inventory_items i ON p.product_id = i.product_id
                     INNER JOIN branches b ON i.branch_id = b.branch_id
                     WHERE ('$categoryFilter' = '' OR p.category = '$categoryFilter')
-                    AND ('$searchProductFilter' = '' OR p.name LIKE '%$searchProductFilter%')
-                    ORDER BY $sortColumn $sortOrder";
+                    AND ('$searchProductFilter' = '' OR p.name LIKE '%$searchProductFilter%')";
+                    
+            if ($branchFilter !== '') {
+                $query .= "AND i.branch_id = '$branchFilter'";
+            }
+
+            $query .= " ORDER BY $sortColumn $sortOrder ";
             $result = mysqli_query($connection,$query);
 ?>
 <!DOCTYPE html>
@@ -50,27 +59,90 @@
             <?php include '../includes/header-admin.php'; ?>  <!-- Inventory KPI section -->
             <h1>Inventory Management KPIs</h1>
             <div class="Kpi">
-                <div title="click to sort by ID">
-                    <h2>Inventory Turnover Rate</h2>
-                    <p>5</p>
+                <div title="The overall total value of the products stored">
+                    <h2>Total Inventory Value</h2>
+                    <?php
+                        $TotalValQuery = "SELECT SUM(i.quantity * p.unit_price) AS total_inventory_value
+                                           FROM inventory_items i
+                                           INNER JOIN products p ON i.product_id = p.product_id;
+                                          ";
+                        $TotalValResult = mysqli_query($connection, $TotalValQuery);
+
+                        if ($TotalValResult && mysqli_num_rows($TotalValResult) > 0) {
+                            $row = mysqli_fetch_assoc($TotalValResult);
+                            echo "<p>£". number_format($row['total_inventory_value']) . "</p>";
+                        } else {
+                            echo "<p>No Products available.</p>";
+                        }
+                    ?>
                 </div>
-                <div title="click to sort by ID">
-                    <h2>Product Sales</h2>
-                    <p>£7,500</p>
+                <div title="Displays products with the lowest stock">
+                    <h2>Lowest Stock Product</h2>
+                    <?php
+                        $lowStockQuery = "SELECT p.name AS product_name, SUM(i.quantity) AS total_quantity
+                        FROM inventory_items i
+                        INNER JOIN products p ON i.product_id = p.product_id
+                        GROUP BY i.product_id
+                        ORDER BY total_quantity ASC
+                        LIMIT 1;
+                        ";
+                    $lowStockResult = mysqli_query($connection, $lowStockQuery);
+
+                    if ($lowStockResult && mysqli_num_rows($lowStockResult) > 0) {
+                        $row = mysqli_fetch_assoc($lowStockResult);
+                        echo "<span>" .htmlspecialchars($row['product_name']) . "</span>";
+                        echo "<p>". intval($row['total_quantity']) . " units</p>";
+                    } else {
+                        echo "<p>No Products available.</p>";
+                    }
+                    ?>
                 </div>
-                <div title="click to sort by ID">
+                <div title="Displays products with the highest stock">
                     <?php
                     ?>
-                    <h2>Rate Of Return</h2>
-                    <p>7%</p>
+                    <h2>Highest Stock Product</h2>
+                    <?php
+                        $highStockQuery = "SELECT p.name AS product_name, SUM(i.quantity) AS total_quantity
+                                  FROM inventory_items i
+                                  INNER JOIN products p ON i.product_id = p.product_id
+                                  GROUP BY i.product_id
+                                  ORDER BY total_quantity DESC
+                                  LIMIT 1;
+                                  ";
+                        $highStockResult = mysqli_query($connection, $highStockQuery);
+
+                        if ($highStockResult && mysqli_num_rows($highStockResult) > 0) {
+                            $row = mysqli_fetch_assoc($highStockResult);
+                            echo "<span>" .htmlspecialchars($row['product_name']) . "</span>";
+                            echo "<p>". intval($row['total_quantity']) . " units</p>";
+                        } else {
+                            echo "<p>No Products available.</p>";
+                        }
+                    ?>
                 </div>
-                <div title="click to sort by ID">
-                    <h2>Average Inventory</h2>
-                    <p>400 Units</p>
+                <div title="Displays the branch with the highest amount of stock">
+                    <h2>Top Branch By Stock</h2>
+                    <?php
+                        $topBranchQuery = "SELECT b.name AS branch_name, SUM(i.quantity) AS total_stock
+                                  FROM inventory_items i
+                                  INNER JOIN branches b ON i.branch_id = b.branch_id
+                                  GROUP BY i.branch_id
+                                  ORDER BY total_stock DESC
+                                  LIMIT 1;
+                                  ";
+                        $topBranchResult = mysqli_query($connection, $topBranchQuery);
+
+                        if ($topBranchResult && mysqli_num_rows($topBranchResult) > 0) {
+                            $row = mysqli_fetch_assoc($topBranchResult);
+                            echo "<p>" . htmlspecialchars($row['branch_name']).": " . intval($row['total_stock']) . "</p>";
+                        } else {
+                            echo "<p>No Products available.</p>";
+                        }
+                    ?>
                 </div>
             </div>
             <div class="nav-btns">   <!-- Inventory Table section -->
-                <a href="">Generate Report</a>
+                <a href="stock-report.php">Generate Report</a>
                 <a href="admin-analytics.php">View Analytics</a>
                 <a href="admin-dashboard-product-form.php">Create Product</a>
             </div>
@@ -81,8 +153,19 @@
                         <select id="category" name="category"> <!-- Dropdown menu for categories of product-->
                             <option value="">All</option>
                             <option value="Perfume"><?= (isset($_GET['category']) && $_GET['category'] == 'Perfume') ? 'selected': '';?>Perfume</option>
-                            <option value="deodorant"><?= (isset($_GET['category']) && $_GET['category'] == 'Deodorant') ? 'selected': '';?>Deodorant</option>
+                            <option value="Aftershave"><?= (isset($_GET['category']) && $_GET['category'] == 'Aftershave') ? 'selected': '';?>Aftershave</option>
                             ?>
+                        </select>
+
+                        <label for="branch"><strong>Branch:</strong></label>
+                        <select id="branch" name="branch"> <!-- Dropdown menu for categories of product-->
+                            <option value="" <?= !isset($_GET['branch']) ? 'selected' : ''; ?>>All Branches</option>
+                            <?php while ($branch = mysqli_fetch_assoc($branchOptionsResult)): ?>
+                                <option value="<?= $branch['branch_id']; ?>"
+                                    <?= (isset($_GET['branch']) && $_GET['branch'] == $branch['branch_id']) ? 'selected' : ''; ?>>
+                                    <?= htmlspecialchars($branch['name']); ?>
+                                </option>
+                            <?php endwhile; ?>
                         </select>
                         <button type="submit">Apply filter</button>
                         <a href="admin-dashboard.php">Clear filter</a>
@@ -109,9 +192,9 @@
                                 <?php endif; ?>
                             
                             </th>
-                            <th><a href="?sort=product.name&order=<?php echo ($sortColumn == 'product.name' && $sortOrder == 'ASC') ? 'desc' : 'asc';?>">
+                            <th><a href="?sort=p.name&order=<?php echo ($sortColumn == 'p.name' && $sortOrder == 'ASC') ? 'desc' : 'asc';?>">
                                 Name
-                                <?php if ($sortColumn == 'product.name'): ?>
+                                <?php if ($sortColumn == 'p.name'): ?>
                                     <?= $sortOrder == 'ASC' ? '▲' : '▼'; ?>
                                 <?php else: ?>
                                     ⇅
