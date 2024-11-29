@@ -1,7 +1,29 @@
 <?php
 require_once '../models/model-admin-analytics.php';
 
-$branch_id = 1; //This is hardcoded... how can we determine which branch id the user wants to select from?
+$branch_id = 1;
+$branch_text = "Sheffield";
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET')
+{
+    $branch_id = $_GET['branch'] ?? 1;
+
+    switch($branch_id)
+    {
+        case 1:
+            $branch_text = "Sheffield";
+            break;
+        case 2:
+            $branch_text = "Leeds";
+                break;
+        case 3:
+            $branch_text = "Manchester";
+                break;
+        case 4:
+            $branch_text = "Nottingham";
+                break;
+    }
+}
 
 class AdminAnalyticsController
 {

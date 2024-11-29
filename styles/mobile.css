@@ -323,18 +323,34 @@ tbody tr td {
 
 /*#region Admin Analytics Page*/
 
-.graphs-item 
+#analytics-graphs-container 
+{
+    display: flex;
+    flex-direction: column;
+    max-width: 75vw;
+}
+
+.graphs-item-container
 {
     font-size: 1em;
     text-align: center;
     width: 100%;
     padding: 1em;
-}
-
-#analytics-graphs-container {
     display: flex;
     flex-direction: column;
-    max-width: 75vw;
+}
+
+#branch-filtering
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#branch-inventory-form
+{
+    padding: 0px 20px;
 }
 
 /*#endregion*/
