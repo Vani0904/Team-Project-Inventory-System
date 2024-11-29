@@ -32,6 +32,7 @@ if (isset($_SESSION['invoice-filter-selected-id'])) //USER ID HAS BEEN CHOSEN TO
     <script src="../scripts/setdate.js" defer></script>
     <script src="../scripts/identifyinvoice.js" defer></script>
     <title>View Invoices</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"/>
 </head>
 
 <body>
@@ -43,8 +44,8 @@ if (isset($_SESSION['invoice-filter-selected-id'])) //USER ID HAS BEEN CHOSEN TO
                 <h1 class="admin">Invoices</h1>
                 <form id="invoice-table-filters" action="invoice-apply-filters.php" method="post">
                     <div class="filter">
-                        <label class="element">By Customer Id:</label>
-                        <select class="element ui" name="user-id-select">
+                        <label><strong>By Customer Id:</strong></label>
+                        <select class="ui" name="user-id-select">
                             <option value="0">Unfiltered</option>
                             <?php foreach ($distinct_users as $distinct_user): ?>
                                 <option><?= $distinct_user['user_id'] ?></option>
@@ -52,15 +53,15 @@ if (isset($_SESSION['invoice-filter-selected-id'])) //USER ID HAS BEEN CHOSEN TO
                         </select>
                     </div>
                     <div class="filter">
-                        <label class="element">By Issue Date Range:</label>
-                        <input id="invoiceDateFrom" type="date" class="element ui" name="invoice-date-filter-from"
+                        <label><strong>By Issue Date Range:</strong></label>
+                        <input id="invoiceDateFrom" type="date" class="ui" name="invoice-date-filter-from"
                             min="2024-01-01" max="2024-12-31"></input>
-                        <label class="element">to:</label>
-                        <input id="invoiceDateTo" type="date" class="element ui" name="invoice-date-filter-to"
+                        <label>to:</label>
+                        <input id="invoiceDateTo" type="date" class="ui" name="invoice-date-filter-to"
                             min="2024-01-01" max="2024-12-31"></input>
                     </div>
                     <div>
-                        <button class="element ui">Apply Filters</button>
+                        <button class="ui">Apply Filters</button>
                     </div>
                 </form>
                 <div id="invoice-table-container">

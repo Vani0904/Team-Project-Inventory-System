@@ -19,7 +19,8 @@ body
     width: 100%;
 }
 
-.segment-margined {
+.segment-margined 
+{
     flex-grow: 1;
     padding: 20px;
     margin-left: 1vw;
@@ -236,38 +237,50 @@ tbody tr td {
 
 /*#region Admin Invoice Page*/
 
-#invoice-table-filters {
+#invoice-table-filters 
+{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     font-size: 1em;
 }
 
-#invoice-table-filters .filter {
+#invoice-table-filters .filter 
+{
     padding: 1vh 0px;
 }
 
-.element {
-    padding: 1vh 1vw;
-    border-radius: 5px;
-    font-size: 0.75em;
+.ui 
+{
+    padding: 5px 20px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    border: 2px solid #8a8a8a;
+    border-radius: 13px;
 }
 
-.element.ui {
-    color: white;
-    background-color: var(--main-color);
-    color-scheme: dark;
-    border: none;
+button.ui 
+{
+    padding: 5px 10px;
+    border: 2px solid #8a8a8a;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+button.ui:hover
+{
+    background-color: var(--purple);
 }
 
 .open-invoice
 {
-    padding: 1vh 1vw;
-    border-radius: 5px;
-    font-size: 0.75em;
-    color: white;
-    background-color: var(--main-color);
-    border: none;
+    background-color: #21b42d;
+    border: 1px solid #65c26d;
+    color: #fff;
+    padding: 4px 6px;
+    margin-right: 3px;
+    text-decoration: none;
 }
 
 #invoice-table-container
@@ -276,47 +289,38 @@ tbody tr td {
     width: 100%;
 }
 
-#invoice-table {
-    border-spacing: 0px;
+#invoice-table 
+{
     border-collapse: collapse;
-    min-width: 100%;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
-    margin: 2vh 0;
-    font-size: 1em;
+    width: 100%;
+    margin: 30px 0;
 }
 
-#invoice-table thead tr {
-    background: var(--main-color);
-    color: white;
-    text-align: left;
+#invoice-table th
+{
+    border: 1px solid #cecece;
+    padding: 10px 5px;
+    align-items: center;
 }
 
-#invoice-table tbody tr td
-{ 
-    text-align: left;
-}
-
-#invoice-table th, #invoice-table td {
-    padding: 1em;
-}
-
-#invoice-table tbody tr {
-    border-bottom: 1px solid var(--main-color);
-}
-
-#invoice-table tbody tr:nth-of-type(even) {
-    background: lightgray;
-}
-
-#invoice-table tbody tr:last-of-type {
-    border-bottom: 2px solid black;
-}
-
-#invoice-table tbody tr.active {
+#invoice-table td 
+{
+    background-color: #e7e6e6;
+    border: 1px solid #cecece;
+    text-align: center;
     font-weight: bold;
-    color: white;
-    background-color: var(--main-color);
-    border: 2px dashed white;
+}
+
+#invoice-table tbody td button
+{
+    padding: 5px 10px;
+    margin: 5px;
+    color: #fff;
+}
+
+#invoice-table tbody td button:hover
+{
+    cursor: pointer;
 }
 
 /*#endregion*/
@@ -351,15 +355,6 @@ tbody tr td {
 #branch-inventory-form
 {
     padding: 0px 20px;
-}
-
-/*#endregion*/
-
-/*#region Across Admin Pages*/
-
-h1.admin {
-    border-bottom: 2px solid black;
-    padding: 2vh 0px;
 }
 
 /*#endregion*/
