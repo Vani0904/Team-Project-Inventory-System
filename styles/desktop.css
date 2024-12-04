@@ -494,7 +494,7 @@ html {
     top: 0;
     left: 0;
     right: 0;
-    background: #fff;
+    background:var(--box-body);
     padding: 2rem 5%;
     display: flex;
     align-items: center;
@@ -544,10 +544,11 @@ a{
    display: flex;
    justify-content: space-between;
    align-items: center;
-   background-color: #f3f3f3;
+   background-color: var(--search-color);
    border-radius: 30px;
    padding: 0px 20px;
    margin-left: auto;
+   border: 1px solid #f1f1f1;
 }
 
 .g-search-box input{
@@ -657,7 +658,7 @@ header .g-icon a{
    border-radius: 5px;
    display: flex;
    flex-direction: column;
-   background-color: #ffffff;
+   background-color: var(--box-body);
    padding: 10px;
    border: 1px solid #f1f1f1;
 }
@@ -689,7 +690,7 @@ header .g-icon a{
    font-weight: 500;
 }
 .our-product-text a{
-    color: #1d1d1d;
+    color:var(--product-text);
     font-weight: 600;
     font-size: 1rem;
     text-align: center;
