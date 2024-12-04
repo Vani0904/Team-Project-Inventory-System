@@ -8,6 +8,16 @@
     --base-variant:#f2f3f7;
 }
 
+.darkmode{
+    --purple:#bb90db;
+    --dark:#7334a2;
+    --box-body:#070b1d;
+    --text:#ffffff;
+    --base-color:#070b1d;
+    --search-color:#070b1d;
+    --base-variant:#070b1d;
+}
+
 *{ /* From admin dashboard styling can change/remove */
     margin: 0;
     padding: 0;
