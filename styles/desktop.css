@@ -1,7 +1,12 @@
 :root{
     --purple:#bb90db;
     --dark:#7334a2;
-}  
+    --box-body:#fff;
+    --text:#1d1d1d;
+    --base-color:#fff;
+    --search-color:#f3f3f3;
+    --base-variant:#f2f3f7;
+}
 
 *{ /* From admin dashboard styling can change/remove */
     margin: 0;
