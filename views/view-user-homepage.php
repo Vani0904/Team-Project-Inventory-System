@@ -3,8 +3,6 @@
 include '../includes/head.php';
 $counter = 0;
 
-//echo count($products);
-
 ?>
 
 <head>

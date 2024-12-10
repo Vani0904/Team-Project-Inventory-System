@@ -1,13 +1,8 @@
 <?php
 
 session_start();
-if(!isset($_SESSION['username']))
+if(!isset($_SESSION['user_name'])) //If user_name is not set (therefore user has accessed this page manually without logging in), prevent them from accessing the page and relocate to login page.
     header(header: "Location: login.php");
-
-$username = $_SESSION['username'];
-$type = "SELECT user_type from user WHERE user_id = '$username'";
-$result = mysqli_query($connection, $type);
-$row = mysqli_fetch_assoc($result);
-
-if($row['user_type'] != 1)
-    header(header: "Location: ../logout.php");
+    
+if($_SESSION['is_admin'] != 1) //If the selected user's type is not 1 therefore NOT set to admin user, prevent them from accessing the page and relocate to guest page.
+    header(header: "Location: ../pages/guest.php");

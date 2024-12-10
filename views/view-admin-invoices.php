@@ -1,5 +1,4 @@
 <?php
-//include '../includes/check-if-admin.php'; This will be required once we have database integration
 include '../includes/head.php';
 
 session_start();
