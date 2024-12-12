@@ -29,6 +29,8 @@ function validate_login($username, $password, $connection) {
     return false;
 }
 
+// Handle login request
+$loginerror = '';
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -42,9 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         header("Location: admin-dashboard.php");
         exit();
     } else {
-        $loginerror = 'yes';
-        include('login.php');
-        exit();
+        $loginerror = 'Invalid username or password. Please try again.';
     }
 }
 
@@ -66,7 +66,7 @@ $connection->close();
         <form class="user-form" action="login.php" method="post">
             <h3>Login</h3>
             <?php if (!empty($loginerror)): ?>
-                <p class="error">Invalid username or password. Please try again.</p>
+                <p class="error"><?php echo htmlspecialchars($loginerror); ?></p>
             <?php endif; ?>
             <input type="text" name="username" required placeholder="Username">
             <input type="password" name="password" required placeholder="Password">
