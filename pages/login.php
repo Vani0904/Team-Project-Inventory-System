@@ -20,9 +20,9 @@ function validate_login($username, $password, $connection) {
             // Set session variables
             $_SESSION['user_name'] = $row['first_name'] . " " . $row['middle_name'] . " " . $row['surname'];
             $_SESSION['user_id'] = $row['user_id'];
-            $_SESSION['is_admin'] = $row['is_admin'];
+            $_SESSION['is_admin'] = $row['user_type'] == 1; // Use user_type to determine admin status
             
-            return $row['is_admin'] ? 'admin' : 'user';
+            return $row['user_type'] == 1 ? 'admin' : 'user'; // Return 'admin' or 'user'
         }
     }
 
