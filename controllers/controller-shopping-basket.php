@@ -1,9 +1,6 @@
 <?php
 require_once '../models/model-shopping-basket.php';
 
-$_SESSION['userid'] = 1; //Remove this line later as it should be getting set when logging in.
-identify_user();
-
 class ShoppingCartController
 {
     public static function showCartItems()
@@ -17,8 +14,7 @@ class ShoppingCartController
         global $total_cost;
         $total_cost = 0.00;
 
-        global $user_id;
-        $cart_id = ShoppingBasket::getCartId($user_id);
+        $cart_id = ShoppingBasket::getCartId($_SESSION['user_id']);
         global $cart_items;
         $cart_items = ShoppingBasket::getAllCartItems($cart_id);
 
@@ -37,8 +33,7 @@ class ShoppingCartController
 
     public static function generateInvoice()
     {
-        global $user_id;
-        $users_full_name = ShoppingBasket::getUsersName($user_id);
+        $users_full_name = ShoppingBasket::getUsersName($_SESSION['user_id']);
         $users_full_address = ShoppingBasket::getUsersAddress($user_id);
 
         global $invoice_description;
@@ -69,14 +64,8 @@ class ShoppingCartController
         $total_cost = floatval($total_cost);
         $invoice_description = str_replace("'", "", $invoice_description);
 
-        ShoppingBasket::insertInvoice($user_id, $invoice_description, $invoice_date, $total_cost, $template_supplier_name, $template_supplier_address_1, $template_supplier_address_3, $template_supplier_postcode, $users_full_name, $user_address_1, $user_address_2, $user_address_3, $user_postcode);
+        ShoppingBasket::insertInvoice($_SESSION['user_id'], $invoice_description, $invoice_date, $total_cost, $template_supplier_name, $template_supplier_address_1, $template_supplier_address_3, $template_supplier_postcode, $users_full_name, $user_address_1, $user_address_2, $user_address_3, $user_postcode);
         ShoppingBasket::clearCart();
     }
-}
-
-function identify_user()
-{
-    global $user_id;
-    $user_id = $_SESSION['userid'];
 }
 ?>

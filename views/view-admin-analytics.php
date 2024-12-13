@@ -18,6 +18,7 @@ global $branch_text;
 <body>
     <div class="container">
         <div class="page-divider">
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
             <?php include '../includes/nav-menu.php'; ?>
             <div class="segment-margined">
                 <?php include '../includes/header-admin.php'; ?>

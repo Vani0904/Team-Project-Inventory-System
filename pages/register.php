@@ -68,6 +68,8 @@
             echo "Invalid registration details.";
         }
     }
+            $_SESSION['user_type'] = 0;
+
 ?>
         
 <!DOCTYPE html>

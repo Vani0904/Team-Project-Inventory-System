@@ -1,4 +1,5 @@
-<?php //include '../includes/check-if-admin.php'; ?> <!--This will be required once we have database integration.-->
+<?php include '../includes/check-if-admin.php'; ?>
+
 <?php include "../includes/connectdb.php";
         $sortColumn = isset($_GET['sort']) ? $_GET['sort'] : 'product_id';
         $sortOrder = isset($_GET['order']) && $_GET['order'] === 'desc' ? 'DESC' : 'ASC';

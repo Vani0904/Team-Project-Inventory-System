@@ -1,8 +1,6 @@
 <?php
 include '../includes/head.php';
 
-session_start();
-
 if (isset($_SESSION['invoice-filter-selected-id'])) //USER ID HAS BEEN CHOSEN TO FILTER
 {
     if (isset($_SESSION['invoice-filter-selected-date-from']) && isset($_SESSION['invoice-filter-selected-date-to'])) 
@@ -37,6 +35,7 @@ if (isset($_SESSION['invoice-filter-selected-id'])) //USER ID HAS BEEN CHOSEN TO
 <body>
     <div class="container">
         <div class="page-divider">
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
             <?php include '../includes/nav-menu.php'; ?>
             <div class="segment-margined">
                 <?php include '../includes/header-admin.php'; ?>
