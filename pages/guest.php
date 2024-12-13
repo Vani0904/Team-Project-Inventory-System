@@ -40,16 +40,18 @@
             <i class="fa-solid fa-magnifying-glass" style="color: #b197fc"></i>
           </button>
         </form>
-      </nav>
-      <!----nav -end -->
 
-      <!-------btn -->
+         <!-------btn -->
       <div class="g-icon">
         <!---------login-->
         <a href="register.php" class="nav-user">
           <i class="fa-regular fa-user" style="color: #b197fc"></i>
         </a>
       </div>
+      </nav>
+      <!----nav -end -->
+
+     
     </header>
 
     <!------------home pic--------------->
