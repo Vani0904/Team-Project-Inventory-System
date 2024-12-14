@@ -606,6 +606,12 @@ header .g-icon a{
    color: #7334a2;
 }
 
+.g-icon{
+    top: 25px;
+    right: 130px;
+    
+}
+
 /*---------home pic start--------*/
 .home{
    display: flex;

@@ -21,7 +21,6 @@ function validate_login($username, $password, $connection) {
             $_SESSION['user_name'] = $row['first_name'] . " " . $row['middle_name'] . " " . $row['surname'];
             $_SESSION['user_id'] = $row['user_id'];
             $_SESSION['is_admin'] = $row['user_type'] == 1; // Use user_type to determine admin status
-            
             return $row['user_type'] == 1 ? 'admin' : 'user'; // Return 'admin' or 'user'
         }
     }
