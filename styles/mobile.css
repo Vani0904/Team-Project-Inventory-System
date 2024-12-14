@@ -475,14 +475,14 @@ h1#generated-report-h1
 }
 
 #generated-report-container{
-    margin-top: 50px;
+    margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
     width: 620px;
     height: fit-content;
     padding-left: 50px;
     padding-right: 50px;
-    padding-top: 25px;
+    padding-top: 1px;
     padding-bottom: 150px;
     border-radius: 10px;
     border: 8px double black;
@@ -494,7 +494,7 @@ h1#generated-report-h1
 }
 #generated-report-container th{
     border: 1px solid #cecece;
-    padding: 10px 5px;
+    padding:  5px;
     align-items: center;
 }
 #generated-report-container td{
