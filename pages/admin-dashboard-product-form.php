@@ -1,7 +1,8 @@
 <?php
         include("../includes/connectdb.php");
         include("../includes/admin-product-functions.php");
-
+        include '../includes/check-if-admin.php';
+        
         $message=''; //Created an empty message variable for success and error fields
         $message_type=''; //Specifying the type so I can show either a success field or an error
 
@@ -25,7 +26,8 @@
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $name = mysqli_real_escape_string($connection, $_POST['name']);
+            $name = mysqli_escape_string($connection, $_POST['name']);
+            $description = isset($_POST['description']) ? mysqli_real_escape_string($connection, $_POST['description']) : '';
             $unit_price = floatval($_POST ['unit_price']); // Ensures unit price is an flaot
             $category = mysqli_real_escape_string($connection, $_POST['category']);
             $manufacturer = mysqli_real_escape_string($connection, $_POST['manufacturer']);
@@ -38,58 +40,71 @@
                 //Process the upload of a new image
                 $imageData = addslashes(file_get_contents($_FILES['image']['tmp_name']));
             } else {
-                if (isset($product['product_image'])) { //use existing or default image
-                    $imageData = $product['product_image'];
-                } else {
-                //Otherwise, use existing image or default image
-                $imageData = "../images/image-product-template.png";
-                }
+                $imageData = isset($product['product_image']) ? $product['product_image'] : "../images/image-product-template.png";
             }
                 if (empty($name) || empty($unit_price) || empty($category) || empty($manufacturer) || empty($branch_id) || empty($quantity)) {
                     $message = "All fields must be entered.";
                     $message_type ="error";
                 } else {
                     if (isset($product_id)) { // Checks whether it is an update or creation of a product
-                        //  Initialize the update query
-                        $updateQuery="UPDATE products SET ";
-
                         $updateFields = [];
-    
+                        $params = [];
+
                         //Check each field to see if it needs updating
                         if ($name !== $product['name']) {
-                            $updateFields[] = "name = '$name'";
+                            $updateFields[] = "name = ?";
+                            $params[] = $name;
+
                         }
     
                         if ($unit_price !== $product['unit_price']) {
-                            $updateFields[] = "unit_price = $unit_price";
+                            $updateFields[] = "unit_price = ?";
+                            $params[] = $unit_price;
                         }
     
                         if ($category !== $product['category']) {
-                            $updateFields[] = "category = '$category'";
+                            $updateFields[] = "category = ?";
+                            $params[] = $category;
                         }
     
                         if ($manufacturer !== $product['manufacturer']) {
-                            $updateFields[] = "manufacturer = '$manufacturer'";
+                            $updateFields[] = "manufacturer = ?";
+                            $params[] = $manufacturer;
+                        }
+
+                        if ($name !== $product['description']) {
+                            $updateFields[] = "description = ?";
+                            $params[] = $description;
                         }
     
                         if (isset($_FILES['image']) && $_FILES['image']['size'] > 0) {
-                            $updateFields[] = "product_image = '$imageData'";
+                            $updateFields[] = "product_image = ?";
+                            $params[] = $imageData;
                         }
     
-                        if (!empty($updateFields)){
-                            $updateQuery = "UPDATE products SET " . implode(", ", $updateFields) . " WHERE product_id = $product_id";
-                                if (mysqli_query($connection,$updateQuery)) {
+                        if (!empty($updateFields)) {
+                            $updateQuery = "UPDATE products SET " . implode(", ", $updateFields) . " WHERE product_id = ?";
+                            $params[] = $product_id;
+
+                            if ($stmt = mysqli_prepare($connection,$updateQuery)) {
+                                $paramTypes = str_repeat('s', count($params) - 1) . 'i';
+                                mysqli_stmt_bind_param($stmt, $paramTypes, ...$params);
+
+                                if (mysqli_stmt_execute($stmt)) {
                                     if ($branch_id && !is_null($quantity)) {
                                         //Update inventory_items table
                                         $inventoryUpdateQuery = "UPDATE inventory_items
-                                                                 SET quantity = $quantity, branch_id = $branch_id
-                                                                 WHERE product_id = $product_id";
-                                        if (mysqli_query($connection,$inventoryUpdateQuery)) {             
-                                            $message = "Product updated successfully.";
-                                            $message_type ="success";
-                                        } else {
-                                            $message="Error updating product: ". mysqli_error($connection);
-                                            $message_type ="error";
+                                                                 SET quantity = ?, branch_id = ?
+                                                                 WHERE product_id = ?";
+                                        if ($inventoryStmt = mysqli_prepare($connection, $inventoryUpdateQuery)) {
+                                            mysqli_stmt_bind_param($inventoryStmt, 'iii', $quantity, $branch_id, $quantity);
+                                            if (mysqli_stmt_execute($inventoryStmt)) {             
+                                                $message = "Product updated successfully.";
+                                                $message_type ="success";
+                                            } else {
+                                                $message="Error updating product: ". mysqli_error($connection);
+                                                $message_type ="error";
+                                            }
                                         }
                                     } else {
                                         $message="Branch or quantity is missing.";
@@ -99,32 +114,40 @@
                                     $message="Error updating product: ". mysqli_error($connection);
                                     $message_type ="error";
                                 }
+                            }
                         } else {
                             $message = "No changes were made to the product.";
                             $message_type ="info";
                         }
                     } else{ 
-                        $insertQuery = "INSERT INTO products (name,unit_price,category,manufacturer,product_image) 
-                                        VALUES ('$name',$unit_price,'$category','$manufacturer','$imageData')";
-                        if (mysqli_query($connection,$insertQuery)) {
-                            $product_id = mysqli_insert_id($connection);
-
-                            //insert into inventory_items table (quantity and branch_id)
-                                $branch_id = intval($_POST['branch_id']);
-                                $quantity = intval($_POST['quantity']);
-
-                                $inventoryInsertQuery = "INSERT INTO inventory_items(product_id,branch_id,quantity)
-                                                        VALUES ($product_id, $branch_id, $quantity)";
-                                mysqli_query($connection, $inventoryInsertQuery);
+                        $insertQuery = "INSERT INTO products (name,unit_price,category,manufacturer,description,product_image) 
+                                        VALUES (?,?,?,?,?,?)";
+                        if ($stmt = mysqli_prepare($connection,$insertQuery)) {
                             
-                            $message = "Product created successfully.";
-                            $message_type ="success";
-                        } else {
-                            $message="Error updating product: ". mysqli_error($connection);
-                            $message_type ="error";
+                            mysqli_stmt_bind_param($stmt, 'sdssss', $name, $unit_price, $category, $manufacturer, $description, $imageData);
+                            if (mysqli_stmt_execute($stmt)) {
+                                $product_id = mysqli_insert_id($connection);
+
+                                //Insert into inventory items table (quantity and branch_id)
+                                $inventoryInsertQuery = "INSERT INTO inventory_items(product_id,branch_id,quantity)
+                                                        VALUES (?,?,?)";
+                                if ($inventoryStmt = mysqli_prepare($connection, $inventoryInsertQuery)) {
+                                    mysqli_stmt_bind_param($inventoryStmt, 'iii', $product_id, $branch_id, $quantity);
+                                    if (mysqli_stmt_execute($inventoryStmt)) {
+                                        $message = "Product created successfully.";
+                                        $message_type ="success";
+                                    } else {
+                                        $message="Error updating product: ". mysqli_error($connection);
+                                        $message_type ="error";
+                                    }
+                                }
+                            } else {
+                                $message="Error creating product: ". mysqli_error($connection);
+                                $message_type ="error";
+                            }
                         }
                     }
-            }
+                }
         }
     ?>
 <!DOCTYPE html>
@@ -150,6 +173,9 @@
         <?php if ($message): ?> <div class="alert <?= $message_type; ?>"><?= $message; ?></div> <?php endif; ?>
         <label for = "name"><strong>Name:</strong></label>
         <input type="text" id="name" name="name" value="<?= isset($product) ? htmlspecialchars($product['name']) : '';?>">
+
+        <label for = "description"><strong>Description:</strong></label>
+        <textarea id="descripion" name="description"><?= isset($product) ? htmlspecialchars($product['description']) : '';?></textarea>
 
         <label for = "unit_price"><strong>Unit Price:</strong></label>
         <input type="text" id="unit_price" name="unit_price" value="<?= isset($product) ? $product['unit_price'] : '';?>">

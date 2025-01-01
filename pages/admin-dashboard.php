@@ -1,22 +1,24 @@
-<?php include '../includes/check-if-admin.php'; ?>
 
-<?php include "../includes/connectdb.php";
+<?php 
+        include "../includes/connectdb.php";
+        include '../includes/check-if-admin.php';
+        
         $sortColumn = isset($_GET['sort']) ? $_GET['sort'] : 'product_id';
         $sortOrder = isset($_GET['order']) && $_GET['order'] === 'desc' ? 'DESC' : 'ASC';
 
-        $branchOptionsQuery = "SELECT branch_id, name FROM branches";
-        $branchOptionsResult = mysqli_query($connection, $branchOptionsQuery);
-        
-        $branchFilter = isset($_GET['branch']) ? mysqli_escape_string($connection, $_GET['branch']) : '';
-        $categoryFilter = isset($_GET['category']) ? mysqli_escape_string($connection, $_GET['category']) : '';
-        $searchProductFilter = isset($_GET['search-product']) ? mysqli_escape_string($connection, $_GET['search-product']) : '';
-        
         //Sets allowed columns for filtering
-        $allowedSortColumns = ['p.name', 'unit_price', 'category', 'quantity'];
+        $allowedSortColumns = ['p.name', 'unit_price', 'category', 'quantity', 'product_id'];
         if (!in_array($sortColumn, $allowedSortColumns)) {
             $sortColumn = 'product_id';
         }
-            
+
+        $branchFilter = isset($_GET['branch']) ? $_GET['branch'] : '';
+        $categoryFilter = isset($_GET['category']) ? htmlspecialchars($_GET['category']) : '';
+        $searchProductFilter = isset($_GET['search-product']) ? $_GET['search-product'] : '';
+        
+        $branchOptionsQuery = "SELECT branch_id, name FROM branches";
+        $branchOptionsResult = mysqli_query($connection, $branchOptionsQuery);
+
             $query = "SELECT
                         p.product_id,
                         p.name AS product_name,
@@ -27,15 +29,42 @@
                     FROM products p
                     INNER JOIN inventory_items i ON p.product_id = i.product_id
                     INNER JOIN branches b ON i.branch_id = b.branch_id
-                    WHERE ('$categoryFilter' = '' OR p.category = '$categoryFilter')
-                    AND ('$searchProductFilter' = '' OR p.name LIKE '%$searchProductFilter%')";
-                    
-            if ($branchFilter !== '') {
-                $query .= "AND i.branch_id = '$branchFilter'";
+                    WHERE 1 = 1 ";
+
+            $bindParams = [];
+
+            //using Prepared statements
+            if (!empty($categoryFilter)) {
+                $query .= " AND p.category = ? ";
+                $bindParams[] = $categoryFilter;
+            }
+            
+            if (!empty($searchProductFilter)) {
+                $query .= " AND p.name LIKE ? ";
+                $bindParams[] = "%$searchProductFilter%";
             }
 
-            $query .= " ORDER BY $sortColumn $sortOrder ";
-            $result = mysqli_query($connection,$query);
+            if (!empty($branchFilter)) {
+                $query .= " AND i.branch_id = ? ";
+                $bindParams[] = $branchFilter;
+
+            }
+
+            $query .= " ORDER BY $sortColumn $sortOrder";
+
+            $stmt = mysqli_prepare($connection, $query);
+
+            if ($stmt) {
+                if ($bindParams) {
+                    $types = str_repeat('s', count($bindParams));
+                    mysqli_stmt_bind_param($stmt, $types, ...$bindParams);
+                }
+            
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
+            } else {
+                die("Error preparing statement: " . mysqli_error($connection));
+            }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,13 +94,15 @@
                     <?php
                         $TotalValQuery = "SELECT SUM(i.quantity * p.unit_price) AS total_inventory_value
                                            FROM inventory_items i
-                                           INNER JOIN products p ON i.product_id = p.product_id;
-                                          ";
-                        $TotalValResult = mysqli_query($connection, $TotalValQuery);
+                                           INNER JOIN products p ON i.product_id = p.product_id;";
+
+                        $stmt = mysqli_prepare($connection, $TotalValQuery);
+                        mysqli_stmt_execute($stmt);
+                        $TotalValResult = mysqli_stmt_get_result($stmt);
 
                         if ($TotalValResult && mysqli_num_rows($TotalValResult) > 0) {
                             $row = mysqli_fetch_assoc($TotalValResult);
-                            echo "<p>£". number_format($row['total_inventory_value']) . "</p>";
+                            echo "<p>£". number_format($row['total_inventory_value'], 2) . "</p>";
                         } else {
                             echo "<p>No Products available.</p>";
                         }
@@ -85,9 +116,11 @@
                         INNER JOIN products p ON i.product_id = p.product_id
                         GROUP BY i.product_id
                         ORDER BY total_quantity ASC
-                        LIMIT 1;
-                        ";
-                    $lowStockResult = mysqli_query($connection, $lowStockQuery);
+                        LIMIT 1;";
+
+                        $stmt = mysqli_prepare($connection, $lowStockQuery);
+                        mysqli_stmt_execute($stmt);
+                        $lowStockResult = mysqli_stmt_get_result($stmt);
 
                     if ($lowStockResult && mysqli_num_rows($lowStockResult) > 0) {
                         $row = mysqli_fetch_assoc($lowStockResult);
@@ -110,7 +143,9 @@
                                   ORDER BY total_quantity DESC
                                   LIMIT 1;
                                   ";
-                        $highStockResult = mysqli_query($connection, $highStockQuery);
+                        $stmt = mysqli_prepare($connection, $highStockQuery);
+                        mysqli_stmt_execute($stmt);
+                        $highStockResult = mysqli_stmt_get_result($stmt);
 
                         if ($highStockResult && mysqli_num_rows($highStockResult) > 0) {
                             $row = mysqli_fetch_assoc($highStockResult);
@@ -131,7 +166,10 @@
                                   ORDER BY total_stock DESC
                                   LIMIT 1;
                                   ";
-                        $topBranchResult = mysqli_query($connection, $topBranchQuery);
+                        $stmt = mysqli_prepare($connection, $topBranchQuery);
+                        mysqli_stmt_execute($stmt);
+                        $topBranchResult = mysqli_stmt_get_result($stmt);
+
 
                         if ($topBranchResult && mysqli_num_rows($topBranchResult) > 0) {
                             $row = mysqli_fetch_assoc($topBranchResult);
@@ -149,12 +187,12 @@
             </div>
             <div class="filter-inputs">
                 <form method="GET" action="admin-dashboard.php">
-                    <div>
+                    <div class="filter-inputs-section">
                         <label for="category"><strong>Item category:</strong></label>
                         <select id="category" name="category"> <!-- Dropdown menu for categories of product-->
                             <option value="">All</option>
-                            <option value="Perfume"><?= (isset($_GET['category']) && $_GET['category'] == 'Perfume') ? 'selected': '';?>Perfume</option>
-                            <option value="Aftershave"><?= (isset($_GET['category']) && $_GET['category'] == 'Aftershave') ? 'selected': '';?>Aftershave</option>
+                            <option value="Perfume"><?= (isset($_GET['category']) && $_GET['category'] == 'Perfume') ? 'selected ': '';?>Perfume</option>
+                            <option value="Aftershave"><?= (isset($_GET['category']) && $_GET['category'] == 'Aftershave') ? 'selected ': '';?>Aftershave</option>
                             ?>
                         </select>
 
@@ -203,7 +241,7 @@
                             
                             </th>
                             <th>Branch</th>
-                            <th><a href="?sort=unit_price&order=<?php echo ($sortColumn == 'unit_price' && $sortOrder == 'ASC') ? 'desc' : 'asc';?>">
+                            <th><a href="?sort=unit_price&order=<?= ($sortColumn == 'unit_price' && $sortOrder == 'ASC') ? 'desc' : 'asc';?>">
                                 Price
                                 <?php if ($sortColumn == 'unit_price'): ?>
                                     <?= $sortOrder == 'ASC' ? '▲' : '▼'; ?>
@@ -213,7 +251,7 @@
                             
                             </th>
                             <th>Category</th>
-                            <th><a href="?sort=quantity&order=<?php echo ($sortColumn == 'quantity' && $sortOrder == 'ASC') ? 'desc' : 'asc';?>">
+                            <th><a href="?sort=quantity&order=<?= ($sortColumn == 'quantity' && $sortOrder == 'ASC') ? 'desc' : 'asc';?>">
                                 Quantity
                                 <?php if ($sortColumn == 'quantity'): ?>
                                     <?= $sortOrder == 'ASC' ? '▲' : '▼'; ?>
@@ -233,12 +271,12 @@
                                 {
                                     ?>
                                     <tr>
-                                        <td data-label="ID"><?php echo $productColumn['product_id']; ?></td>
-                                        <td data-label="Name"><?php echo $productColumn['product_name']; ?></td>
-                                        <td data-label="Branch"><?php echo $productColumn['branch_name']; ?></td>
-                                        <td data-label="Price">£<?php echo $productColumn['unit_price']; ?></td>
-                                        <td data-label="Category"><?php echo $productColumn['category']; ?></td>
-                                        <td data-label="Quantity"><?php echo $productColumn['quantity']; ?></td>
+                                        <td data-label="ID"><?= $productColumn['product_id']; ?></td>
+                                        <td data-label="Name"><?= htmlspecialchars($productColumn['product_name']); ?></td>
+                                        <td data-label="Branch"><?= htmlspecialchars($productColumn['branch_name']); ?></td>
+                                        <td data-label="Price">£<?= number_format($productColumn['unit_price'],2); ?></td>
+                                        <td data-label="Category"><?= htmlspecialchars($productColumn['category']); ?></td>
+                                        <td data-label="Quantity"><?= intval($productColumn['quantity']); ?></td>
                                         <td data-label="Actions">
                                         <a href="admin-dashboard-product-form.php?product-id=<?= $productColumn['product_id']; ?>" class="edit-item-btn">Edit</a>
                                         <a href="admin-dashboard-delete-product.php?action=delete&product-id=<?= $productColumn['product_id']; ?>" class="delete-item-btn"
