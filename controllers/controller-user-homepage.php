@@ -12,10 +12,15 @@ class ProductController
             $filter_manufacturer = $_GET['brand'] ?? null;
             $filter_price_min = $_GET['price-min'] ?? 1;
             $filter_price_max = $_GET['price-max'] ?? 300;
+            $search_query = $_GET['searchbar'] ?? '';
             
             global $products;
-            $products = UserHomepage::get_filtered_products($filter_manufacturer, $filter_price_min, $filter_price_max);    
-        }
+            if (!empty($search_query)) {
+                $products = UserHomepage::get_searched_products($search_query); // Call the search model method
+            } else {
+                $products = UserHomepage::get_filtered_products($filter_manufacturer, $filter_price_min, $filter_price_max);    
+            } 
+       }
 
         require '../views/view-user-homepage.php';
     }
