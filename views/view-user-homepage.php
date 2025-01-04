@@ -68,5 +68,5 @@ $counter = 0;
 </body>
 
 <?php include '../pages/footer.html'; ?>
-
+<script src="../scripts/darkmode.js"></script>
 </html>
