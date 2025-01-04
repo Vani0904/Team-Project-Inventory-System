@@ -5,11 +5,12 @@
     <div id="right">
         <button id="button-logout">Logout</button>
         <div class="spaced">
-            <form id="search-container">
-                <input id="searchbar" type="text" placeholder="Search..." name="searchbar" value="<?= $_GET['searchbar'] ?? '' ?>">
-                <button id="search-button" type="submit"><img src="../images/icon-search.png"
-                        alt="search button magnifying glass" width="25px" height="25px"></button>
-            </form>
+             <form id="search-container" method="GET" action="user-homepage.php">
+                   <input id="searchbar" type="text" placeholder="Search..." name="searchbar" value="<?= $_GET['searchbar'] ?? '' ?>">
+                   <button id="search-button" type="submit">
+                   <img src="../images/icon-search.png" alt="search button magnifying glass" width="25px" height="25px">
+                   </button>
+              </form>
         </div>
         <div id="basket-button-container">
             <label id="basket-label">Shopping Cart:</label>
