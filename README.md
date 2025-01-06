@@ -5,7 +5,7 @@ A web-based Inventory Management system designed to:
 • Issue invoices.
 • Support multiple branches.
 • Provide a responsive user interface for all devices.
----
+-
 ## Features
 • Add, update, and delete inventory items.
 • Track inventory across multiple branches.
