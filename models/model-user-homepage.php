@@ -67,5 +67,28 @@ class UserHomepage
 
         return $products;
     }
+
+    public static function get_searched_products($search_query)
+    {
+        $db = Database::connect();
+        $query = "SELECT * FROM products WHERE name LIKE ? ORDER BY name";
+        
+        $stmt = $db->prepare($query);
+        $search_term = "%" . $search_query . "%"; // Add wildcard for partial matching
+        $stmt->bind_param("s", $search_term); // Bind the search query
+        $stmt->execute();
+    
+        $result = $stmt->get_result();
+        $products = [];
+    
+        while ($row = $result->fetch_assoc()) {
+            $products[] = $row;
+        }
+    
+        return $products;
+    }
+
+
+
 }
 ?>
