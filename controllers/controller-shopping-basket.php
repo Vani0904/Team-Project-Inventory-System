@@ -15,6 +15,7 @@ class ShoppingCartController
         $total_cost = 0.00;
 
         $cart_id = ShoppingBasket::getCartId($_SESSION['user_id']);
+
         global $cart_items;
         $cart_items = ShoppingBasket::getAllCartItems($cart_id);
 
@@ -34,7 +35,7 @@ class ShoppingCartController
     public static function generateInvoice()
     {
         $users_full_name = ShoppingBasket::getUsersName($_SESSION['user_id']);
-        $users_full_address = ShoppingBasket::getUsersAddress($user_id);
+        $users_full_address = ShoppingBasket::getUsersAddress($_SESSION['user_id']);
 
         global $invoice_description;
         global $total_cost;
@@ -43,7 +44,7 @@ class ShoppingCartController
 
         global $cart_items;
 
-        for ($i = 0; $i <= count($cart_items); $i++) 
+        for ($i = 0; $i < count($cart_items); $i++) 
         {
             global $invoice_description;
             $invoice_description .= $cart_items[$i]['quantity'] . '*' . $cart_items[$i]['manufacturer'] . "(" . $cart_items[$i]['name'] . ")" . '@' . $cart_items[$i]['unit_price'] . "\n";
