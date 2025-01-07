@@ -1,5 +1,6 @@
 <?php 
-include "../includes/connectdb.php"; 
+include "../includes/connectdb.php";
+include '../includes/check-if-admin.php';
     $query = "SELECT
                 b.name AS branch_name,
                 p.name AS product_name,
