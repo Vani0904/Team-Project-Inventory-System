@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 21, 2024 at 02:34 AM
+-- Generation Time: Jan 07, 2025 at 11:00 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -64,7 +64,8 @@ CREATE TABLE `cart_items` (
 --
 
 INSERT INTO `cart_items` (`cart_item_id`, `cart_id`, `product_id`, `quantity`) VALUES
-(1, 1, 16, 2);
+(7, 2, 5, 1),
+(8, 2, 11, 2);
 
 -- --------------------------------------------------------
 
@@ -195,11 +196,14 @@ CREATE TABLE `invoices` (
 --
 
 INSERT INTO `invoices` (`invoice_id`, `user_id`, `invoice_description`, `invoice_date`, `payment_date`, `total_cost`, `supplier_name`, `supplier_address_1`, `supplier_address_2`, `supplier_address_3`, `supplier_postcode`, `customer_name`, `customer_address_1`, `customer_address_2`, `customer_address_3`, `customer_postcode`) VALUES
-(1, 1, '2*Dior(Miss Dior Blooming Bouquet)@66\n1*Dior(Suavage)@69.99\n1*Ard Al Zaafaran(Oud Al Turas)@14.99\n', '2024-11-15', NULL, 219.97, 'Sheffield', '30 Brown Ln', NULL, 'Sheffield', 'S12 NH', 'Stephen Alan Wake', '52 Longest Street', 'Dustington', 'Sheffield', 'S13 ZB'),
-(2, 1, '1*Ralph Lauren(Polo Deep Blue)@59.77\n2*Lattafa(Asad Black)@19.49\n', '2024-11-18', NULL, 101.74, 'Sheffield', '30 Brown Ln', NULL, 'Sheffield', 'S12 NH', 'Stephen Alan Wake', '52 Longest Street', 'Dustington', 'Sheffield', 'S13 ZB'),
-(3, 1, '2*Calvin Klein(Man)@38.8\n', '2024-11-20', NULL, 80.59, 'Sheffield', '30 Brown Ln', NULL, 'Sheffield', 'S12 NH', 'Stephen Alan Wake', '52 Longest Street', 'Dustington', 'Sheffield', 'S13 ZB'),
-(4, 1, '3*Giorgio Armani(Si)@120\n', '2024-11-21', NULL, 362.99, 'Sheffield', '30 Brown Ln', NULL, 'Sheffield', 'S12 NH', 'Stephen Alan Wake', '52 Longest Street', 'Dustington', 'Sheffield', 'S13 ZB'),
-(5, 1, '1*Calvin Klein(Eternity for Men Reflections)@43.44\n1*Chanel(Blue De Chanel)@83.2\n*()@\n', '2024-11-21', NULL, 129.63, 'Sheffield', '30 Brown Ln', NULL, 'Sheffield', 'S12 NH', 'Stephen Alan Wake', '52 Longest Street', 'Dustington', 'Sheffield', 'S13 ZB');
+(1, 1, '2*Dior(Miss Dior Blooming Bouquet)@66\n1*Dior(Suavage)@69.99\n1*Ard Al Zaafaran(Oud Al Turas)@14.99\n', '2024-11-15', NULL, 219.97, 'Sheffield', '30 Brown Ln', NULL, 'Sheffield', 'S12 NH', 'Archie Adams', '52 Longest Street', '', 'Sheffield', 'S13 ZB'),
+(2, 1, '1*Ralph Lauren(Polo Deep Blue)@59.77\n2*Lattafa(Asad Black)@19.49\n', '2024-11-18', NULL, 101.74, 'Sheffield', '30 Brown Ln', NULL, 'Sheffield', 'S12 NH', 'Archie Adams', '52 Longest Street', '', 'Sheffield', 'S13 ZB'),
+(3, 1, '2*Calvin Klein(Man)@38.8\n', '2024-11-20', NULL, 80.59, 'Sheffield', '30 Brown Ln', NULL, 'Sheffield', 'S12 NH', 'Archie Adams', '52 Longest Street', '', 'Sheffield', 'S13 ZB'),
+(4, 1, '3*Giorgio Armani(Si)@120\n', '2024-11-21', NULL, 362.99, 'Sheffield', '30 Brown Ln', NULL, 'Sheffield', 'S12 NH', 'Archie Adams', '52 Longest Street', '', 'Sheffield', 'S13 ZB'),
+(5, 3, '1*Calvin Klein(Eternity for Men Reflections)@43.44\n1*Chanel(Blue De Chanel)@83.2\n*()@\n', '2024-11-21', NULL, 129.63, 'Sheffield', '30 Brown Ln', NULL, 'Sheffield', 'S12 NH', 'Ralph Richardson', '78 Nowhere', 'Falsehood', 'Sheffield', 'S13 ZB'),
+(6, 3, '3*Valentino(Born In Roma Donna For Her)@97\n*()@\n', '2024-11-29', NULL, 293.99, 'Sheffield', '30 Brown Ln', NULL, 'Sheffield', 'S12 NH', 'Ralph Richardson', '78 Nowhere', 'Falsehood', 'Sheffield', 'S12 NC'),
+(7, 3, '2*Ard Al Zaafaran(Heibah)@17\n1*Valentino(Born In Roma Donna For Her)@97\n*()@\n', '2024-11-29', NULL, 133.99, 'Sheffield', '30 Brown Ln', NULL, 'Sheffield', 'S12 NH', 'Ralph Richardson', '78 Nowhere', 'Falsehood', 'Sheffield', 'S12 NC'),
+(8, 2, '3*Yves(Black Opium)@100\n1*Calvin Klein(Man)@38.8\n', '2025-01-03', NULL, 341.79, 'Sheffield', '30 Brown Ln', NULL, 'Sheffield', 'S12 NH', 'Eugene Lance Upton', '32 Fake Avenue', '', 'Leeds', 'LS90DX');
 
 -- --------------------------------------------------------
 
@@ -278,7 +282,9 @@ CREATE TABLE `shopping_carts` (
 --
 
 INSERT INTO `shopping_carts` (`cart_id`, `user_id`) VALUES
-(1, 1);
+(1, 1),
+(2, 2),
+(3, 3);
 
 -- --------------------------------------------------------
 
@@ -286,27 +292,30 @@ INSERT INTO `shopping_carts` (`cart_id`, `user_id`) VALUES
 -- Table structure for table `users`
 --
 
-CREATE TABLE 'users' (
-  'user_id' int NOT NULL,
-  'cart_id' int NOT NULL,
-  'first_name' varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  'middle_name' varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  'surname' varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  'username' varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  'password' varchar(60) COLLATE utf8mb4_general_ci NOT NULL,
-  'user_type' tinyint NOT NULL,
-  'address_1' varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  'address_2' varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  'address_3' varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  'postcode' char(6) COLLATE utf8mb4_general_ci NOT NULL
+CREATE TABLE `users` (
+  `user_id` int NOT NULL,
+  `cart_id` int NOT NULL,
+  `first_name` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `middle_name` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `surname` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `username` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(60) COLLATE utf8mb4_general_ci NOT NULL,
+  `user_type` tinyint NOT NULL,
+  `address_1` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `address_2` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `address_3` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `postcode` char(6) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO 'users' ('user_id', 'cart_id', 'first_name', 'middle_name', 'surname', 'username', 'password', 'user_type', 'address_1', 'address_2', 'address_3', 'postcode') VALUES
-(1, 1, 'Stephen', 'Alan', 'Wake', 'swake', '1000', 0, '52 Longest Street', 'Dustington', 'Sheffield', 'S13 ZB');
+INSERT INTO `users` (`user_id`, `cart_id`, `first_name`, `middle_name`, `surname`, `username`, `password`, `user_type`, `address_1`, `address_2`, `address_3`, `postcode`) VALUES
+(1, 1, 'Archie', '', 'Adams', 'aadams', '$2y$10$BmVChZ4HXxRTlNGpuBmwEujyw0kFo4ad8IauoD3xoavjRjiDn5az6', 1, '52 Longest Street', '', 'Sheffield', 'S13 ZB'),
+(2, 2, 'Eugene', 'Lance', 'Upton', 'eupton', '$2y$10$EX68BF.resKdQk14jQd/sObWPXf1yRugjSqVLWCVDMwGeokNhpgIK', 0, '32 Fake Avenue', '', 'Leeds', 'LS90DX'),
+(3, 3, 'Ralph', '', 'Richardson', 'rrichardson', '$2y$10$wkuWzHWsfx6XaD0fTStIHO690aeqMGhdp039nBjD3M.4LSfzKa776', 0, '78 Nowhere', 'Falsehood', 'Sheffield', 'S12NC'),
+(4, 0, 'Simon', '', 'Rogers', 'srogers', '$2y$10$XfjCkHAZZF5qRL7cpUm5F.tKysiV2g5q4xYs5zXlWczSzM2CimFB2', 0, '35 Fictional Road', '', 'Sheffield', 'S13 AX');
 
 --
 -- Indexes for dumped tables
@@ -375,7 +384,7 @@ ALTER TABLE `branches`
 -- AUTO_INCREMENT for table `cart_items`
 --
 ALTER TABLE `cart_items`
-  MODIFY `cart_item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `cart_item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `inventory_items`
@@ -387,7 +396,7 @@ ALTER TABLE `inventory_items`
 -- AUTO_INCREMENT for table `invoices`
 --
 ALTER TABLE `invoices`
-  MODIFY `invoice_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `invoice_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -399,13 +408,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `shopping_carts`
 --
 ALTER TABLE `shopping_carts`
-  MODIFY `cart_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `cart_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
