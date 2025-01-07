@@ -92,9 +92,8 @@ class ShoppingBasket
     public static function clearCart()
     {
         $db = Database::connect();
-        global $user_id;
-        
-        $id = ShoppingBasket::getCartId($user_id);
+
+        $id = ShoppingBasket::getCartId($_SESSION['user_id']);
 
         $query = "DELETE FROM cart_items WHERE cart_id = $id";
         $result = $db->query($query);

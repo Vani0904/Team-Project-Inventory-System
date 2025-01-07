@@ -42,6 +42,9 @@ $counter = 0;
                 </div>
             </div>
             <div id="products-grid-container">
+                 <?php if (empty($products)): ?>
+                     <p>No products found matching your search.</p>
+                 <?php else: ?>
                 <?php
                 foreach ($products as $product) 
                 {
@@ -58,11 +61,12 @@ $counter = 0;
                     }
                 }
                 ?>
+                <?php endif; ?>
             </div>
         </div>
     </div>
 </body>
 
 <?php include '../pages/footer.html'; ?>
-
+<script src="../scripts/darkmode.js"></script>
 </html>

@@ -44,8 +44,8 @@
             // Prepare the insert query
             $stmt = $connection->prepare("
                INSERT INTO users 
-              (first_name, middle_name, surname, username, password, user_type, address_1, address_2, address_3, postcode) 
-               VALUES (?, ?, ?, ?, ?, 0, ?, ?, ?, ?)
+              (cart_id, first_name, middle_name, surname, username, password, user_type, address_1, address_2, address_3, postcode) 
+               VALUES (0, ?, ?, ?, ?, ?, 0, ?, ?, ?, ?)
             ");
 
             // Bind parameters for the query
